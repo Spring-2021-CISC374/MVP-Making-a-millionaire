@@ -1,6 +1,6 @@
-class Scene3 extends Phaser.Scene {
+class Scene4 extends Phaser.Scene {
     constructor() {
-        super("shopScene");
+        super("settingScene");
     }
 
     create() {
@@ -12,7 +12,7 @@ class Scene3 extends Phaser.Scene {
             this.input.on('pointerdown', () => this.scene.start('mainMenu'))
         })
 
-        this.add.text(350,150,"Shop", {
+        this.add.text(350,150,"Settings", {
             font: "25px Arial", 
             fill: "yellow"
         });
