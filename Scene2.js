@@ -9,7 +9,7 @@ class Scene2 extends Phaser.Scene {
         this.physics.world.setBoundsCollision();
 
         
-        
+        this.input.on('pointerdown', () => this.scene.start('additionalScene'))
         
         this.anims.create({
             key: "ship1_anim",
