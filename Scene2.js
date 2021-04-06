@@ -8,8 +8,11 @@ class Scene2 extends Phaser.Scene {
         
         this.physics.world.setBoundsCollision();
 
-        
-        this.input.on('pointerdown', () => this.scene.start('additionalScene'))
+        this.menuBtn = this.add.image("60", "25", "menu_btn")
+        .setInteractive()
+        .on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, () => {
+            this.input.on('pointerdown', () => this.scene.start('mainMenu'))
+        })
         
         this.anims.create({
             key: "ship1_anim",

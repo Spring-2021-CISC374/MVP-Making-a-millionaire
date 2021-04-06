@@ -1,18 +1,17 @@
 class Scene3 extends Phaser.Scene {
     constructor() {
-        super("additionalScene");
+        super("shopScene");
     }
 
     create() {
         let config = this.game.config;
         
-        this.ship1 = this.add.sprite(config.width/2 -50, config.height/2,"ship");
-
-        this.button1 = this.add.image("60", "25", "back_btn")
+        this.backBtn = this.add.image("60", "25", "back_btn")
         .setInteractive()
         .on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, () => {
-            this.input.on('pointerdown', () => this.scene.start('playGame'))
+            this.input.on('pointerdown', () => this.scene.start('mainMenu'))
         })
+
         
         this.physics.world.setBoundsCollision();
     }
