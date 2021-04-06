@@ -2,7 +2,7 @@
 
 Matt - Question screen + right answer
 
-Yash - Button to navigate between scenes
+Yash - Navigation menu and buttons
 
 Chris - 
 
