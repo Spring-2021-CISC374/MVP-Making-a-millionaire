@@ -4,6 +4,6 @@ Matt - Question screen
 
 Yash - Navigation menu and buttons
 
-Chris - 
+Chris - assorted graphics, sfx and music
 
 Jon - 
