@@ -13,5 +13,10 @@ window.onload =  function() {
         }
     }
     var game = new Phaser.Game(config);
-    
+
+    export var flags = {
+        questionsAttempted = 0,
+        currentScore = 0,
+        currentStreak = 0
+    }
 }
