@@ -19,6 +19,7 @@ class Scene1 extends Phaser.Scene {
         this.add.text(20,20,"Loading game...");
         this.scene.start("playGame");*/
 
+        console.log("Scene 1 score: ", this.game.registry.get("score"));
 
         let config = this.game.config;
 

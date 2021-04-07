@@ -15,6 +15,7 @@ class Scene2 extends Phaser.Scene {
         this.menuBtn = this.add.image("60", "25", "menu_btn")
         .setInteractive()
         .on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, () => {
+            this.game.registry.set("score", 30)
             this.input.on('pointerdown', () => this.scene.start('mainMenu'))
         })
 
@@ -24,7 +25,7 @@ class Scene2 extends Phaser.Scene {
         this.question_frame.setOrigin(0,0);
         this.question_insideA = this.add.image("85","461","question_inside").setInteractive()
         .on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, () => {
-            this.input.on('pointerdown', () => this.scene.start('mainMenu'))
+            this.input.on('pointerdown', () => this.scene.resume('mainMenu'))
         })
         this.question_insideA.setOrigin(0,0);
         this.question_insideB = this.add.image("445","461","question_inside").setInteractive()
@@ -45,7 +46,6 @@ class Scene2 extends Phaser.Scene {
 
         //not sure if this line does anything
         this.cursorKeys = this.input.keyboard.createCursorKeys();
-
     }
 
     update() {
@@ -73,5 +73,8 @@ class Scene2 extends Phaser.Scene {
             font: "20px Arial", 
             fill: "yellow"
         });
+        console.log("Score: ", this.game.registry.get("score"))
+        this.game.registry.set("score", 20)
+        console.log("Score: ", this.game.registry.get("score"))
     }
 }

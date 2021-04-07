@@ -14,6 +14,8 @@ window.onload =  function() {
     }
     var game = new Phaser.Game(config);
 
+    game.registry.set("score", 5)
+
     /*
     export var flags = {
         questionsAttempted = 0,
