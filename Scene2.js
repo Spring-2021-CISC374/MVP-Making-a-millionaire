@@ -1,5 +1,3 @@
-import {flags} from "game.js";
-
 class Scene2 extends Phaser.Scene {
     constructor() {
         super("playGame");
@@ -48,9 +46,6 @@ class Scene2 extends Phaser.Scene {
         //not sure if this line does anything
         this.cursorKeys = this.input.keyboard.createCursorKeys();
 
-        this.add.text(20,500,flags.currentScore.toString(), {
-            font: "14px Arial", 
-            fill: "yellow"
-        });
+        
     }
 }

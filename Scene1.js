@@ -1,5 +1,3 @@
-import {flags} from "game.js";
-
 class Scene1 extends Phaser.Scene {
     constructor() {
         super("mainMenu");
