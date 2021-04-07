@@ -46,6 +46,32 @@ class Scene2 extends Phaser.Scene {
         //not sure if this line does anything
         this.cursorKeys = this.input.keyboard.createCursorKeys();
 
-        
+    }
+
+    update() {
+        this.displayQuestion("Which of these is a financial term?","Global Variable","Compound Interest","Convergent Evolution","Three Pointer");
+    }
+
+    displayQuestion(question,aA,aB,aC,aD) {
+        this.add.text(117,372,question, {
+            font: "24px Arial", 
+            fill: "yellow"
+        });
+        this.add.text(85,468,aA, {
+            font: "20px Arial", 
+            fill: "yellow"
+        });
+        this.add.text(445,468,aB, {
+            font: "20px Arial", 
+            fill: "yellow"
+        });
+        this.add.text(85,533,aC, {
+            font: "20px Arial", 
+            fill: "yellow"
+        });
+        this.add.text(445,533,aD, {
+            font: "20px Arial", 
+            fill: "yellow"
+        });
     }
 }

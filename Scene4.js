@@ -16,12 +16,6 @@ class Scene4 extends Phaser.Scene {
             font: "25px Arial", 
             fill: "yellow"
         });
-
-        this.add.text(350,250,"Settings", {
-            font: "25px Arial", 
-            fill: "yellow"
-        });
-
         
         this.physics.world.setBoundsCollision();
     }
