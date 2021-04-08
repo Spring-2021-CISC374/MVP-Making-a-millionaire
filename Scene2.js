@@ -35,29 +35,35 @@ class Scene2 extends Phaser.Scene {
     }
 
     update() {
+        //this is an initial question, later we can change this
         var question = ["Which of these is a financial term?","b","Global Variable","Compound Interest","Convergent Evolution","Three Pointer"]
         this.loadQuestion(question);
     }
 
     loadQuestion(question) {
+        //sets answer as "a" "b" "c" or "d"
         var answer = question[1];
 
+        //handles a being correct
         if (answer == "a") {
             this.question_insideA = this.add.image("85","461","question_inside").setInteractive()
             .on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, () => {
                 this.input.on('pointerdown', () => this.add.text(200,200,"RIGHT", {
                     font: "20px Arial", 
                     fill: "yellow"}))
+                    //stuff to happen if right and chosen
                     console.log("Score: ", this.game.registry.get("score"))
                     this.game.registry.set("score", this.game.registry.get("score")+5)
                     console.log("Score: ", this.game.registry.get("score"))
             })
+        //handles a being wrong
         } else {
             this.question_insideA = this.add.image("85","461","question_inside").setInteractive()
             .on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, () => {
                 this.input.on('pointerdown', () => this.add.text(200,200,"WRONG", {
                     font: "20px Arial", 
                     fill: "yellow"}))
+                    //stuff to happen if wrong and chosen
                     console.log("Score: ", this.game.registry.get("score"))
                     this.game.registry.set("score", this.game.registry.get("score")-5)
                     console.log("Score: ", this.game.registry.get("score"))
