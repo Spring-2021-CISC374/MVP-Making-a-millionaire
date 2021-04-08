@@ -9,6 +9,7 @@ class Scene1 extends Phaser.Scene {
         this.load.image("start_btn","assets/images/start_btn.png");
         this.load.image("menu_btn","assets/images/menu_btn.png");
         this.load.image("shop_btn","assets/images/shop_btn.png");
+        this.load.image("streak_img", "assets/images/x2streak.png");
         this.load.image("settings_btn","assets/images/settings_btn.png");
         this.load.audio("click","sounds/goodclick.mp3");
     }
@@ -24,22 +25,27 @@ class Scene1 extends Phaser.Scene {
         let config = this.game.config;
 
         this.clickSound = this.sound.add("click");
+
+        this.add.text(400,200,"Making a Millionaire", {
+            font: "30px Arial", 
+            fill: "yellow"
+        });
         
-        this.startBtn = this.add.image("400", "225", "start_btn")
+        this.startBtn = this.add.image("400", "275", "start_btn")
         .setInteractive()
         .on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, () => {
             this.input.on('pointerdown', () => this.scene.start('playGame'))
             this.clickSound.play();
         })
 
-        this.shopBtn = this.add.image("400", "300", "shop_btn")
+        this.shopBtn = this.add.image("400", "350", "shop_btn")
         .setInteractive()
         .on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, () => {
             this.input.on('pointerdown', () => this.scene.start('shopScene'))
             this.clickSound.play();
         })
 
-        this.settingsBtn = this.add.image("400", "375", "settings_btn")
+        this.settingsBtn = this.add.image("400", "425", "settings_btn")
         .setInteractive()
         .on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, () => {
             this.input.on('pointerdown', () => this.scene.start('settingScene'))
