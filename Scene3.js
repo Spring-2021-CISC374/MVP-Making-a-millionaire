@@ -34,7 +34,7 @@ class Scene3 extends Phaser.Scene {
         .on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, () => {
             //this.input.on('pointerdown', () => this.scene.start('mainMenu'))
             //this.streak.setScale(1.25)
-            console.log("Streak bought");
+            this.buy("streak", 200, this.streak_owned);
         })
 
         this.fiftylifeline = this.add.image("400", "235", "5050_img")
@@ -42,7 +42,7 @@ class Scene3 extends Phaser.Scene {
         .on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, () => {
             //this.input.on('pointerdown', () => this.scene.start('mainMenu'))
             //this.streak.setScale(1.25)
-            console.log("5050 lifeline bought bought");
+            this.buy("fifty", 150, this.fifty_owned);
         })
 
         this.audiencelifeline = this.add.image("600", "235", "audience_img")
@@ -50,7 +50,7 @@ class Scene3 extends Phaser.Scene {
         .on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, () => {
             //this.input.on('pointerdown', () => this.scene.start('mainMenu'))
             //this.streak.setScale(1.25)
-            console.log("Audience lifeline bought bought");
+            this.buy("audience", 120, this.audience_owned);
         })
 
         this.add.text(350,120,"Shop", {
@@ -58,7 +58,7 @@ class Scene3 extends Phaser.Scene {
             fill: "yellow"
         });
 
-        this.mult_price = this.add.text(160,290,"Price: 200", {
+        this.streak_price = this.add.text(160,290,"Price: 200", {
             font: "18px Arial", 
             fill: "yellow"
         });
@@ -73,7 +73,7 @@ class Scene3 extends Phaser.Scene {
             fill: "yellow"
         });
 
-        this.mult_owned = this.add.text(155,315,"Owned:  "+this.game.registry.get("streak"), {
+        this.streak_owned = this.add.text(155,315,"Owned:  "+this.game.registry.get("streak"), {
             font: "18px Arial", 
             fill: "yellow"
         });
@@ -83,7 +83,7 @@ class Scene3 extends Phaser.Scene {
             fill: "yellow"
         });
 
-        this.fifty_owned = this.add.text(555,315,"Owned:  "+this.game.registry.get("audience"), {
+        this.audience_owned = this.add.text(555,315,"Owned:  "+this.game.registry.get("audience"), {
             font: "18px Arial", 
             fill: "yellow"
         });
@@ -98,6 +98,7 @@ class Scene3 extends Phaser.Scene {
     }
 
     update() {
+        /*
         this.streak.on('pointerover',function(pointer){
             this.enlarge_image();
             //this.streak.setScale(1.25);
@@ -106,7 +107,17 @@ class Scene3 extends Phaser.Scene {
         this.streak.on('pointerout',function(pointer){
             this.decrease_image();
             //this.streak.setScale(1)
-        })
+        })*/
+    }
+
+    buy (name, price, owned_text) {
+        if (this.game.registry.get("score") >= price) {
+            this.game.registry.set("score", this.game.registry.get("score") - price);
+            this.game.registry.set(name, this.game.registry.get(name)+1);
+            console.log("Quantity: ", this.game.registry.get(name));
+            owned_text.setText("Owned:  "+this.game.registry.get(name));
+            this.cashtext.setText("Cash:  "+this.game.registry.get("score"))
+        }
     }
 
     enlarge_image() {
