@@ -8,12 +8,15 @@ class Scene2 extends Phaser.Scene {
         this.load.image("question_frame_top","assets/images/question_frame_top.png");
         this.load.image("question_inside","assets/images/question_inside.png");
         this.load.audio("click","sounds/goodclick.mp3");
+        this.load.image("background","graphics/background1.png");
     }
 
     create() {
         let config = this.game.config;
 
         this.clickSound = this.sound.add("click");
+
+        this.background = this.add.image(400,300,"background");
     
         this.menuBtn = this.add.image("60", "25", "menu_btn")
         .setInteractive()
