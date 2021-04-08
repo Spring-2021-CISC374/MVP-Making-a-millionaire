@@ -15,6 +15,7 @@ class Scene1 extends Phaser.Scene {
         this.load.image("audience_img", "assets/images/audienceresize.png");
         this.load.image("settings_btn","assets/images/settings_btn.png");
         this.load.audio("click","sounds/goodclick.mp3");
+        this.load.audio("backgroundMusic","sounds/suspense.mp3");
     }
 
     create() {
@@ -26,7 +27,9 @@ class Scene1 extends Phaser.Scene {
         console.log("Scene 1 score: ", this.game.registry.get("score"));
 
         let config = this.game.config;
-
+/*
+        this.suspenseMusic = this.sound.add("backgroundMusic").play();
+*/
         this.clickSound = this.sound.add("click");
 
         this.add.text(275,150,"Making a Millionaire", {
