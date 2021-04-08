@@ -22,6 +22,7 @@ class Scene2 extends Phaser.Scene {
         .setInteractive()
         .on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, () => {
             this.game.registry.set("score", 30)
+            this.clickSound.play();
             this.input.on('pointerdown', () => this.scene.start('mainMenu'))
             this.clickSound.play();
         })
@@ -31,7 +32,7 @@ class Scene2 extends Phaser.Scene {
         this.question_frame = this.add.image("0","445","question_frame");
         this.question_frame.setOrigin(0,0);
 
-        
+        this.clickSound = this.sound.add("click");
 
         //not sure if this line does anything
         this.cursorKeys = this.input.keyboard.createCursorKeys();

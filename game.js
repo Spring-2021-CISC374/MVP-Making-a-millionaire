@@ -14,7 +14,11 @@ window.onload =  function() {
     }
     var game = new Phaser.Game(config);
 
-    game.registry.set("score", 5)
+    game.registry.set("score", 1000)
+    game.registry.set("streak", 0)
+    game.registry.set("fifty", 0)
+    game.registry.set("audience", 0)
+
 
     /*
     export var flags = {

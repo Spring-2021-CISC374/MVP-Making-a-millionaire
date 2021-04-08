@@ -9,7 +9,10 @@ class Scene1 extends Phaser.Scene {
         this.load.image("start_btn","assets/images/start_btn.png");
         this.load.image("menu_btn","assets/images/menu_btn.png");
         this.load.image("shop_btn","assets/images/shop_btn.png");
-        this.load.image("streak_img", "assets/images/x2streak.png");
+        this.load.image("invest_btn","assets/images/invest_btn.png");
+        this.load.image("streak_img", "assets/images/x2resize.png");
+        this.load.image("5050_img", "assets/images/5050resize.png");
+        this.load.image("audience_img", "assets/images/audienceresize.png");
         this.load.image("settings_btn","assets/images/settings_btn.png");
         this.load.audio("click","sounds/goodclick.mp3");
     }
@@ -26,7 +29,7 @@ class Scene1 extends Phaser.Scene {
 
         this.clickSound = this.sound.add("click");
 
-        this.add.text(400,200,"Making a Millionaire", {
+        this.add.text(275,150,"Making a Millionaire", {
             font: "30px Arial", 
             fill: "yellow"
         });
