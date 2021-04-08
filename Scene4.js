@@ -15,6 +15,7 @@ class Scene4 extends Phaser.Scene {
         this.backBtn = this.add.image("60", "25", "back_btn")
         .setInteractive()
         .on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, () => {
+            this.clickSound.play();
             this.input.on('pointerdown', () => this.scene.start('mainMenu'))
             this.clickSound.play();
         })
