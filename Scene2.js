@@ -7,16 +7,20 @@ class Scene2 extends Phaser.Scene {
         this.load.image("question_frame","assets/images/question_frame.png");
         this.load.image("question_frame_top","assets/images/question_frame_top.png");
         this.load.image("question_inside","assets/images/question_inside.png");
+        this.load.audio("click","sounds/goodclick.mp3");
     }
 
     create() {
         let config = this.game.config;
+
+        this.clickSound = this.sound.add("click");
     
         this.menuBtn = this.add.image("60", "25", "menu_btn")
         .setInteractive()
         .on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, () => {
             this.game.registry.set("score", 30)
             this.input.on('pointerdown', () => this.scene.start('mainMenu'))
+            this.clickSound.play();
         })
 
         this.question_frame_top = this.add.image("0","335","question_frame_top");
