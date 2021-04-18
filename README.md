@@ -12,12 +12,12 @@ Jon -
 
 MVP Project Plan:
 
-More questions, random selection of questions, without repeating
+More questions, random selection of questions, without repeating - Matt
 
-Investments
+Investments - Chris
 
-Powerups to be usable
+Powerups to be usable - Yash
 
-Track $$ and display it between rounds
+Track $$ and display it between rounds - Chris
 
-Game ending scene after X questions
+Game ending scene after X questions - Matt
