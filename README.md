@@ -14,10 +14,10 @@ MVP Project Plan:
 
 More questions, random selection of questions, without repeating
 
-Investments
+Investments - Chris
 
 Powerups to be usable
 
-Track $$ and display it between rounds
+Track $$ and display it between rounds - Chris
 
 Game ending scene after X questions
