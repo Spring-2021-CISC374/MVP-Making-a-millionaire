@@ -14,6 +14,9 @@ class Scene2 extends Phaser.Scene {
     create() {
         let config = this.game.config;
 
+        this.questionAmount = 5;
+        this.answered = 0;
+
         this.clickSound = this.sound.add("click");
 
         this.background = this.add.image(400,300,"background");
@@ -21,7 +24,7 @@ class Scene2 extends Phaser.Scene {
         this.menuBtn = this.add.image("60", "25", "menu_btn")
         .setInteractive()
         .on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, () => {
-            this.game.registry.set("score", 30)
+            //this.game.registry.set("score", 30)
             this.clickSound.play();
             this.input.on('pointerdown', () => this.scene.start('mainMenu'))
             this.clickSound.play();
@@ -37,15 +40,18 @@ class Scene2 extends Phaser.Scene {
         //not sure if this line does anything
         this.cursorKeys = this.input.keyboard.createCursorKeys();
 
-        console.log("Score: ", this.game.registry.get("score"))
-        this.game.registry.set("score", 20)
-        console.log("Score: ", this.game.registry.get("score"))
+        this.game.registry.set("questionNumber",this.game.registry.get("questionNumber")+1);
     }
 
     update() {
         //this is an initial question, later we can change this
         var question = ["Which of these is a financial term?","b","Global Variable","Compound Interest","Convergent Evolution","Three Pointer"]
+        
+        this.add.text(350,10,"Question #" + this.game.registry.get("questionNumber"), {
+            font: "20px Arial", 
+            fill: "yellow"})
         this.loadQuestion(question);
+        
     }
 
     loadQuestion(question) {
@@ -56,25 +62,29 @@ class Scene2 extends Phaser.Scene {
         if (answer == "a") {
             this.question_insideA = this.add.image("85","461","question_inside").setInteractive()
             .on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, () => {
-                this.input.on('pointerdown', () => this.add.text(200,200,"RIGHT", {
+                this.input.on('pointerdown', () => {if (this.answered <= 1) {this.add.text(350,100,"RIGHT", {
                     font: "20px Arial", 
-                    fill: "yellow"}))
+                    fill: "yellow"})}})
                     //stuff to happen if right and chosen
-                    console.log("Score: ", this.game.registry.get("score"))
-                    this.game.registry.set("score", this.game.registry.get("score")+5)
-                    console.log("Score: ", this.game.registry.get("score"))
+                    this.answered++;
+                    console.log("Score before: ", this.game.registry.get("score"))
+                    this.game.registry.set("score", this.game.registry.get("score")+this.questionAmount)
+                    console.log("Score after: ", this.game.registry.get("score"))
+                    this.questionAmount = 0;
             })
         //handles a being wrong
         } else {
             this.question_insideA = this.add.image("85","461","question_inside").setInteractive()
             .on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, () => {
-                this.input.on('pointerdown', () => this.add.text(200,200,"WRONG", {
+                this.input.on('pointerdown', () => {if (this.answered <= 1) {this.add.text(350,100,"WRONG", {
                     font: "20px Arial", 
-                    fill: "yellow"}))
+                    fill: "yellow"})}})
                     //stuff to happen if wrong and chosen
+                    this.answered++;
                     console.log("Score: ", this.game.registry.get("score"))
-                    this.game.registry.set("score", this.game.registry.get("score")-5)
+                    this.game.registry.set("score", this.game.registry.get("score")-this.questionAmount)
                     console.log("Score: ", this.game.registry.get("score"))
+                    this.questionAmount = 0;
             })
         }
         this.question_insideA.setOrigin(0,0);
@@ -82,23 +92,27 @@ class Scene2 extends Phaser.Scene {
         if (answer == "b") {
             this.question_insideB = this.add.image("445","461","question_inside").setInteractive()
             .on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, () => {
-                this.input.on('pointerdown', () => this.add.text(200,200,"RIGHT", {
+                this.input.on('pointerdown', () => {if (this.answered <= 1) {this.add.text(350,100,"RIGHT", {
                     font: "20px Arial", 
-                    fill: "yellow"}))
-                    console.log("Score: ", this.game.registry.get("score"))
-                    this.game.registry.set("score", this.game.registry.get("score")+5)
-                    console.log("Score: ", this.game.registry.get("score"))
+                    fill: "yellow"})}})
+                    this.answered++;
+                    console.log("Score before: ", this.game.registry.get("score"))
+                    this.game.registry.set("score", this.game.registry.get("score")+this.questionAmount)
+                    console.log("Score after: ", this.game.registry.get("score"))
+                    this.questionAmount = 0;
                     
             })
         } else {
                 this.question_insideB = this.add.image("445","461","question_inside").setInteractive()
             .on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, () => {
-                this.input.on('pointerdown', () => this.add.text(200,200,"WRONG", {
+                this.input.on('pointerdown', () => {if (this.answered <= 1) {this.add.text(350,100,"WRONG", {
                     font: "20px Arial", 
-                    fill: "yellow"}))
+                    fill: "yellow"})}})
+                    this.answered++;
                     console.log("Score: ", this.game.registry.get("score"))
-                    this.game.registry.set("score", this.game.registry.get("score")-5)
+                    this.game.registry.set("score", this.game.registry.get("score")-this.questionAmount)
                     console.log("Score: ", this.game.registry.get("score"))
+                    this.questionAmount = 0;
             })
         }
         this.question_insideB.setOrigin(0,0);
@@ -106,22 +120,26 @@ class Scene2 extends Phaser.Scene {
         if (answer == "c") {
             this.question_insideC = this.add.image("85","526","question_inside").setInteractive()
             .on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, () => {
-                this.input.on('pointerdown', () => this.add.text(200,200,"RIGHT", {
+                this.input.on('pointerdown', () => {if (this.answered <= 1) {this.add.text(350,100,"RIGHT", {
                     font: "20px Arial", 
-                    fill: "yellow"}))
-                    console.log("Score: ", this.game.registry.get("score"))
-                    this.game.registry.set("score", this.game.registry.get("score")+5)
-                    console.log("Score: ", this.game.registry.get("score"))
+                    fill: "yellow"})}})
+                    this.answered++;
+                    console.log("Score before: ", this.game.registry.get("score"))
+                    this.game.registry.set("score", this.game.registry.get("score")+questionAmount)
+                    console.log("Score after: ", this.game.registry.get("score"))
+                    this.questionAmount = 0;
             })
         } else {
                 this.question_insideC = this.add.image("85","526","question_inside").setInteractive()
             .on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, () => {
-                this.input.on('pointerdown', () => this.add.text(200,200,"WRONG", {
+                this.input.on('pointerdown', () => {if (this.answered <= 1) {this.add.text(350,100,"WRONG", {
                     font: "20px Arial", 
-                    fill: "yellow"}))
+                    fill: "yellow"})}})
+                    this.answered++;
                     console.log("Score: ", this.game.registry.get("score"))
-                    this.game.registry.set("score", this.game.registry.get("score")-5)
+                    this.game.registry.set("score", this.game.registry.get("score")-this.questionAmount)
                     console.log("Score: ", this.game.registry.get("score"))
+                    this.questionAmount = 0;
             })
         }
         this.question_insideC.setOrigin(0,0);
@@ -129,22 +147,26 @@ class Scene2 extends Phaser.Scene {
         if (answer == "d") {
             this.question_insideD = this.add.image("445","526","question_inside").setInteractive()
             .on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, () => {
-                this.input.on('pointerdown', () => this.add.text(200,200,"RIGHT", {
+                this.input.on('pointerdown', () => {if (this.answered <= 1) {this.add.text(350,100,"RIGHT", {
                     font: "20px Arial", 
-                    fill: "yellow"}))
-                    console.log("Score: ", this.game.registry.get("score"))
-                    this.game.registry.set("score", this.game.registry.get("score")+5)
-                    console.log("Score: ", this.game.registry.get("score"))
+                    fill: "yellow"})}})
+                    this.answered++;
+                    console.log("Score before: ", this.game.registry.get("score"))
+                    this.game.registry.set("score", this.game.registry.get("score")+questionAmount)
+                    console.log("Score after: ", this.game.registry.get("score"))
+                    this.questionAmount = 0;
             })
         } else {
                 this.question_insideD = this.add.image("445","526","question_inside").setInteractive()
             .on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, () => {
-                this.input.on('pointerdown', () => this.add.text(200,200,"WRONG", {
+                this.input.on('pointerdown', () => {if (this.answered <= 1) {this.add.text(350,100,"WRONG", {
                     font: "20px Arial", 
-                    fill: "yellow"}))
-                    console.log("Score: ", this.game.registry.get("score"))
-                    this.game.registry.set("score", this.game.registry.get("score")-5)
-                    console.log("Score: ", this.game.registry.get("score"))
+                    fill: "yellow"})}})
+                    this.answered++;
+                    console.log("Score before: ", this.game.registry.get("score"))
+                    this.game.registry.set("score", this.game.registry.get("score")-this.questionAmount)
+                    console.log("Score after: ", this.game.registry.get("score"))
+                    this.questionAmount = 0;
             })
         }
         this.question_insideD.setOrigin(0,0);

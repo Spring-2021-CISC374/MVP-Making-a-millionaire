@@ -18,6 +18,7 @@ window.onload =  function() {
     game.registry.set("streak", 0)
     game.registry.set("fifty", 0)
     game.registry.set("audience", 0)
+    game.registry.set("questionNumber",0)
 
 
     /*
