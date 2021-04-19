@@ -47,6 +47,11 @@ class Scene2 extends Phaser.Scene {
         //this is an initial question, later we can change this
         var question = ["Which of these is a financial term?","b","Global Variable","Compound Interest","Convergent Evolution","Three Pointer"]
         
+        if (this.game.registry.get("questionNumber") > 10) {
+            //currently does not fully work
+            this.scene.start('endScene')
+        }
+
         this.add.text(350,10,"Question #" + this.game.registry.get("questionNumber"), {
             font: "20px Arial", 
             fill: "yellow"})
