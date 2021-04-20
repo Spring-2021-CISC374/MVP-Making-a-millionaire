@@ -83,12 +83,12 @@ class Scene1 extends Phaser.Scene {
         "100% chance of $400",
         "65% chance of $650"];
 
-        this.q4 = ["test1",
-        "c",
-        "test1",
-        "test2",
-        "test3",
-        "test4"];
+        this.q4 = ["Which is not a reliable way to save for retirement?",
+        "d",
+        "401k",
+        "Traditional IRA",
+        "Roth IRA",
+        "Bitcoin"];
 
         this.game.registry.set("questionBank",[this.q1,this.q2,this.q3,this.q4]);
     }
