@@ -45,14 +45,15 @@ class Scene2 extends Phaser.Scene {
 
     update() {
         //this is an initial question, later we can change this
-        var question = ["Which of these is a financial term?","b","Global Variable","Compound Interest","Convergent Evolution","Three Pointer"]
-        
-        if (this.game.registry.get("questionNumber") > 10) {
+        var questionNumber = this.game.registry.get("questionNumber");
+        var question = this.game.registry.get("questionBank")[questionNumber -1];
+
+        if (questionNumber > 10) {
             //currently does not fully work
             this.scene.start('endScene')
         }
 
-        this.add.text(350,10,"Question #" + this.game.registry.get("questionNumber"), {
+        this.add.text(350,10,"Question #" + questionNumber, {
             font: "20px Arial", 
             fill: "yellow"})
         this.loadQuestion(question);
@@ -76,6 +77,8 @@ class Scene2 extends Phaser.Scene {
                     this.game.registry.set("score", this.game.registry.get("score")+this.questionAmount)
                     console.log("Score after: ", this.game.registry.get("score"))
                     this.questionAmount = 0;
+                    setTimeout(this.titleScreen,3000);
+
             })
         //handles a being wrong
         } else {
@@ -90,6 +93,8 @@ class Scene2 extends Phaser.Scene {
                     this.game.registry.set("score", this.game.registry.get("score")-this.questionAmount)
                     console.log("Score: ", this.game.registry.get("score"))
                     this.questionAmount = 0;
+                    setTimeout(this.titleScreen,3000);
+
             })
         }
         this.question_insideA.setOrigin(0,0);
@@ -105,6 +110,7 @@ class Scene2 extends Phaser.Scene {
                     this.game.registry.set("score", this.game.registry.get("score")+this.questionAmount)
                     console.log("Score after: ", this.game.registry.get("score"))
                     this.questionAmount = 0;
+                    setTimeout(this.titleScreen,3000);
                     
             })
         } else {
@@ -118,6 +124,7 @@ class Scene2 extends Phaser.Scene {
                     this.game.registry.set("score", this.game.registry.get("score")-this.questionAmount)
                     console.log("Score: ", this.game.registry.get("score"))
                     this.questionAmount = 0;
+                    setTimeout(this.titleScreen,3000);
             })
         }
         this.question_insideB.setOrigin(0,0);
@@ -133,6 +140,7 @@ class Scene2 extends Phaser.Scene {
                     this.game.registry.set("score", this.game.registry.get("score")+questionAmount)
                     console.log("Score after: ", this.game.registry.get("score"))
                     this.questionAmount = 0;
+                    setTimeout(this.titleScreen,3000);
             })
         } else {
                 this.question_insideC = this.add.image("85","526","question_inside").setInteractive()
@@ -145,6 +153,7 @@ class Scene2 extends Phaser.Scene {
                     this.game.registry.set("score", this.game.registry.get("score")-this.questionAmount)
                     console.log("Score: ", this.game.registry.get("score"))
                     this.questionAmount = 0;
+                    setTimeout(this.titleScreen,3000);
             })
         }
         this.question_insideC.setOrigin(0,0);
@@ -160,6 +169,7 @@ class Scene2 extends Phaser.Scene {
                     this.game.registry.set("score", this.game.registry.get("score")+questionAmount)
                     console.log("Score after: ", this.game.registry.get("score"))
                     this.questionAmount = 0;
+                    setTimeout(this.titleScreen,3000);
             })
         } else {
                 this.question_insideD = this.add.image("445","526","question_inside").setInteractive()
@@ -172,6 +182,7 @@ class Scene2 extends Phaser.Scene {
                     this.game.registry.set("score", this.game.registry.get("score")-this.questionAmount)
                     console.log("Score after: ", this.game.registry.get("score"))
                     this.questionAmount = 0;
+                    setTimeout(this.titleScreen,3000);
             })
         }
         this.question_insideD.setOrigin(0,0);
@@ -196,6 +207,11 @@ class Scene2 extends Phaser.Scene {
             font: "20px Arial", 
             fill: "yellow"
         });
-
     }
+
+    titleScreen() {
+        //not sure why this doesn't work
+        this.scene.start('mainMenu')
+    }
+
 }

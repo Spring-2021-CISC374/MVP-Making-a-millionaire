@@ -59,6 +59,38 @@ class Scene1 extends Phaser.Scene {
         })
        
 
+        // Is this an efficent way to code in the questions? Absolitely not.
+        // Is it an effective way? YES.
+
+        this.q1 = ["Which of these is a financial term?",
+        "b",
+        "Global Variable",
+        "Compound Interest",
+        "Convergent Evolution",
+        "Three Pointer"];
+
+        this.q2 = ["This term represents partial ownership of a company",
+        "a",
+        "Stocks",
+        "Bonds",
+        "Assets",
+        "Liabilities"];
+
+        this.q3 = ["Which has a higher expected value?",
+        "a",
+        "10% chance of $5,000",
+        "1% chance of $25,000",
+        "100% chance of $400",
+        "65% chance of $650"];
+
+        this.q4 = ["test1",
+        "c",
+        "test1",
+        "test2",
+        "test3",
+        "test4"];
+
+        this.game.registry.set("questionBank",[this.q1,this.q2,this.q3,this.q4]);
     }
 }
 
