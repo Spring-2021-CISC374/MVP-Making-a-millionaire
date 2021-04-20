@@ -203,6 +203,8 @@ class Scene2 extends Phaser.Scene {
         }
         this.question_insideD.setOrigin(0,0);
 
+        this.cashtext.setText("Cash:  "+this.game.registry.get("score"));
+
         this.add.text(117,372,question[0], {
             font: "25px Helvetica", 
             fill: "yellow"
