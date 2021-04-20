@@ -91,7 +91,9 @@ class Scene3 extends Phaser.Scene {
 
         this.cashtext = this.add.text(625,25,"Cash:  "+this.game.registry.get("score"), {
             font: "18px Arial", 
-            fill: "yellow"
+            fill: "yellow",
+            stroke: 'black',
+            strokeThickness: 3
         });
 
         this.physics.world.setBoundsCollision();

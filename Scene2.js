@@ -30,6 +30,13 @@ class Scene2 extends Phaser.Scene {
             this.clickSound.play();
         })
 
+        this.cashtext = this.add.text(625,25,"Cash:  "+this.game.registry.get("score"), {
+            font: "18px Arial", 
+            fill: "yellow",
+            stroke: 'black',
+            strokeThickness: 3
+        });
+
         this.question_frame_top = this.add.image("0","335","question_frame_top");
         this.question_frame_top.setOrigin(0,0);
         this.question_frame = this.add.image("0","445","question_frame");

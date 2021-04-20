@@ -57,6 +57,13 @@ class Scene1 extends Phaser.Scene {
             this.input.on('pointerdown', () => this.scene.start('settingScene'))
             this.clickSound.play();
         })
+
+        this.cashtext = this.add.text(625,25,"Cash:  "+this.game.registry.get("score"), {
+            font: "18px Arial", 
+            fill: "yellow",
+            stroke: 'black',
+            strokeThickness: 3
+        });
        
 
         // Is this an efficent way to code in the questions? Absolitely not.
