@@ -27,6 +27,8 @@ class Scene3 extends Phaser.Scene {
         .on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, () => {
             this.clickSound.play();
             //this.input.on('pointerdown', () => this.scene.start('mainMenu'))
+            this.buy("investment", 100, this.invest_text);
+            //this.game.registry.set("investment", this.game.registry.get("investment")+100);
         })
 
         this.streak = this.add.image("200", "235", "streak_img")
@@ -96,6 +98,13 @@ class Scene3 extends Phaser.Scene {
             strokeThickness: 3
         });
 
+        this.invest_text = this.add.text(320,550,"Amount Invested: "+this.game.registry.get("investment"), {
+            font: "18px Arial", 
+            fill: "yellow",
+            stroke: 'black',
+            strokeThickness: 3
+        });
+
         this.physics.world.setBoundsCollision();
     }
 
@@ -115,10 +124,16 @@ class Scene3 extends Phaser.Scene {
     buy (name, price, owned_text) {
         if (this.game.registry.get("score") >= price) {
             this.game.registry.set("score", this.game.registry.get("score") - price);
-            this.game.registry.set(name, this.game.registry.get(name)+1);
+            if (name == "investment") {this.game.registry.set(name, this.game.registry.get(name)+100);}
+            else {this.game.registry.set(name, this.game.registry.get(name)+1);}
             console.log("Quantity: ", this.game.registry.get(name));
+            this.cashtext.setText("Cash:  "+this.game.registry.get("score"));
+        }
+        if (name == "investment"){
+            this.invest_text.setText("Amount Invested: "+this.game.registry.get("investment"));
+        }
+        else {
             owned_text.setText("Owned:  "+this.game.registry.get(name));
-            this.cashtext.setText("Cash:  "+this.game.registry.get("score"))
         }
     }
 

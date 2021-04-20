@@ -19,6 +19,7 @@ window.onload =  function() {
     game.registry.set("fifty", 0)
     game.registry.set("audience", 0)
     game.registry.set("questionNumber",0)
+    game.registry.set("investment",0)
 
 
     /*

@@ -71,6 +71,7 @@ class Scene2 extends Phaser.Scene {
         //sets answer as "a" "b" "c" or "d"
         var answer = question[1];
 
+
         //handles a being correct
         if (answer == "a") {
             this.question_insideA = this.add.image("85","461","question_inside").setInteractive()
@@ -85,6 +86,7 @@ class Scene2 extends Phaser.Scene {
                     console.log("Score after: ", this.game.registry.get("score"))
                     this.questionAmount = 0;
                     setTimeout(this.titleScreen,3000);
+                    this.game.registry.set("investment", this.game.registry.get("investment")*1.05);
 
             })
         //handles a being wrong
@@ -101,6 +103,7 @@ class Scene2 extends Phaser.Scene {
                     console.log("Score: ", this.game.registry.get("score"))
                     this.questionAmount = 0;
                     setTimeout(this.titleScreen,3000);
+                    this.game.registry.set("investment", this.game.registry.get("investment")*1.05);
 
             })
         }
@@ -118,6 +121,7 @@ class Scene2 extends Phaser.Scene {
                     console.log("Score after: ", this.game.registry.get("score"))
                     this.questionAmount = 0;
                     setTimeout(this.titleScreen,3000);
+                    this.game.registry.set("investment", this.game.registry.get("investment")*1.05);
                     
             })
         } else {
@@ -132,6 +136,7 @@ class Scene2 extends Phaser.Scene {
                     console.log("Score: ", this.game.registry.get("score"))
                     this.questionAmount = 0;
                     setTimeout(this.titleScreen,3000);
+                    this.game.registry.set("investment", this.game.registry.get("investment")*1.05);
             })
         }
         this.question_insideB.setOrigin(0,0);
@@ -148,6 +153,7 @@ class Scene2 extends Phaser.Scene {
                     console.log("Score after: ", this.game.registry.get("score"))
                     this.questionAmount = 0;
                     setTimeout(this.titleScreen,3000);
+                    this.game.registry.set("investment", this.game.registry.get("investment")*1.05);
             })
         } else {
                 this.question_insideC = this.add.image("85","526","question_inside").setInteractive()
@@ -161,6 +167,7 @@ class Scene2 extends Phaser.Scene {
                     console.log("Score: ", this.game.registry.get("score"))
                     this.questionAmount = 0;
                     setTimeout(this.titleScreen,3000);
+                    this.game.registry.set("investment", this.game.registry.get("investment")*1.05);
             })
         }
         this.question_insideC.setOrigin(0,0);
@@ -177,6 +184,7 @@ class Scene2 extends Phaser.Scene {
                     console.log("Score after: ", this.game.registry.get("score"))
                     this.questionAmount = 0;
                     setTimeout(this.titleScreen,3000);
+                    this.game.registry.set("investment", this.game.registry.get("investment")*1.05);
             })
         } else {
                 this.question_insideD = this.add.image("445","526","question_inside").setInteractive()
@@ -190,6 +198,7 @@ class Scene2 extends Phaser.Scene {
                     console.log("Score after: ", this.game.registry.get("score"))
                     this.questionAmount = 0;
                     setTimeout(this.titleScreen,3000);
+                    this.game.registry.set("investment", this.game.registry.get("investment")*1.05);
             })
         }
         this.question_insideD.setOrigin(0,0);
