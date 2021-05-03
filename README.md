@@ -10,14 +10,21 @@ Jon -
 
 
 
-MVP Project Plan:
+MVP Beta Project Plan:
 
 More questions, random selection of questions, without repeating - Matt
 
-Investments - Chris
+Investments (multiple, more visual, pull money out) - Chris
 
 Powerups to be usable - Yash
 
-Track $$ and display it between rounds - Chris
+Game ending scene after X questions - Matt and Chris
 
-Game ending scene after X questions - Matt
+Streaks and money balance - Matt
+
+
+LOW PRIORITY:
+
+graphics and sfx - Chris
+
+Settings/credits - anyone
