@@ -97,7 +97,84 @@ class Scene1 extends Phaser.Scene {
         "Roth IRA",
         "Bitcoin"];
 
-        this.game.registry.set("questionBank",[this.q1,this.q2,this.q3,this.q4]);
+        this.q5 = ["If you work for 43 years, around how many hours will you work?",
+        "a",
+        "86,000 hours",
+        "244,000 hours",
+        "6,500 hours",
+        "980 hours"];
+
+        this.q6 = ["Sometimes the US government is referred to with this name",
+        "c",
+        "Father Fred",
+        "Aunt Sally",
+        "Uncle Sam",
+        "Uncle Fred"];
+
+        this.q7 = ["When it comes to taxes, the more money you make...",
+        "a",
+        "The more taxes you pay",
+        "The fewer taxes you pay",
+        "Everyone pays the same",
+        "The lower % you pay in taxes"];
+
+        this.q8 = ["US government funded Health Insurance is called:",
+        "d",
+        "FICO",
+        "Heals on Wheels",
+        "Foodstamps",
+        "Medicare"];
+
+        this.q9 = ["What is a common trait of financiallly secure people?",
+        "c",
+        "Quit school before 18",
+        "Always keep $500 on them",
+        "Worked part-time as a teen",
+        "Started a business"];
+
+        this.q10 = ["This is a plan for how to spend money",
+        "b",
+        "Paycheck",
+        "Budget",
+        "Credit Card",
+        "Cash Diary"];
+        /*
+        this.q11 = ["Which is not a reliable way to save for retirement?",
+        "d",
+        "401k",
+        "Traditional IRA",
+        "Roth IRA",
+        "Bitcoin"];
+
+        this.q12 = ["Which is not a reliable way to save for retirement?",
+        "d",
+        "401k",
+        "Traditional IRA",
+        "Roth IRA",
+        "Bitcoin"];
+
+        this.q13 = ["Which is not a reliable way to save for retirement?",
+        "d",
+        "401k",
+        "Traditional IRA",
+        "Roth IRA",
+        "Bitcoin"];
+
+        this.q14 = ["Which is not a reliable way to save for retirement?",
+        "d",
+        "401k",
+        "Traditional IRA",
+        "Roth IRA",
+        "Bitcoin"];
+
+        this.q15 = ["Which is not a reliable way to save for retirement?",
+        "d",
+        "401k",
+        "Traditional IRA",
+        "Roth IRA",
+        "Bitcoin"];
+        */
+        this.game.registry.set("questionBank",[this.q1,this.q2,this.q3,this.q4,this.q5,this.q6,this.q7,this.q8,this.q9,this.q10]);
     }
 }
 

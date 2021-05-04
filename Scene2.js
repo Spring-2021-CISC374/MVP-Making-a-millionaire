@@ -14,7 +14,7 @@ class Scene2 extends Phaser.Scene {
     create() {
         let config = this.game.config;
 
-        this.questionAmount = 5;
+        this.questionAmount = 100;
         this.answered = 0;
 
         this.clickSound = this.sound.add("click");
@@ -62,7 +62,7 @@ class Scene2 extends Phaser.Scene {
         var questionNumber = this.game.registry.get("questionNumber");
         var question = this.game.registry.get("questionBank")[questionNumber -1];
 
-        if (questionNumber > 4) {
+        if (questionNumber > 10) {
             //currently does not fully work
             this.scene.start('endScene')
         }
@@ -177,7 +177,7 @@ class Scene2 extends Phaser.Scene {
                     })}})
                     this.answered++;
                     console.log("Score before: ", this.game.registry.get("score"))
-                    this.game.registry.set("score", this.game.registry.get("score")+questionAmount)
+                    this.game.registry.set("score", this.game.registry.get("score")+this.questionAmount)
                     console.log("Score after: ", this.game.registry.get("score"))
                     this.questionAmount = 0;
                     setTimeout(this.titleScreen,3000);
@@ -216,7 +216,7 @@ class Scene2 extends Phaser.Scene {
                     })}})
                     this.answered++;
                     console.log("Score before: ", this.game.registry.get("score"))
-                    this.game.registry.set("score", this.game.registry.get("score")+questionAmount)
+                    this.game.registry.set("score", this.game.registry.get("score")+this.questionAmount)
                     console.log("Score after: ", this.game.registry.get("score"))
                     this.questionAmount = 0;
                     setTimeout(this.titleScreen,3000);
