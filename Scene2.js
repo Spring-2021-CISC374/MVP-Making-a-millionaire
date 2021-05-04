@@ -64,7 +64,7 @@ class Scene2 extends Phaser.Scene {
         var questionNumber = this.game.registry.get("questionNumber");
         var question = this.game.registry.get("questionBank")[questionNumber -1];
 
-        if (questionNumber > 2) {
+        if (questionNumber > 9) {
             //currently does not fully work
             this.scene.start('endScene')
         }
