@@ -22,7 +22,8 @@ class Scene2 extends Phaser.Scene {
         this.clickSound = this.sound.add("click");
 
         this.background = this.add.image(400,300,"background");
-    
+        
+        /*
         this.menuBtn = this.add.image("60", "25", "menu_btn")
         .setInteractive()
         .on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, () => {
@@ -30,7 +31,7 @@ class Scene2 extends Phaser.Scene {
             this.clickSound.play();
             this.input.on('pointerdown', () => this.scene.start('mainMenu'))
             this.clickSound.play();
-        })
+        })*/
 
         this.cashtext = this.add.text(662,13,"Cash:  "+this.game.registry.get("score"), {
             font: "22px Arial", 

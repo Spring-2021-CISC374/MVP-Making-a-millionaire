@@ -105,14 +105,14 @@ class Scene1 extends Phaser.Scene {
         "Roth IRA",
         "Bitcoin"];
 
-        this.q5 = ["If you work for 43 years, around how many hours will you work?",
+        this.q5 = ["Approximate number of hours worked over 43 years",
         "a",
         "86,000 hours",
         "244,000 hours",
         "6,500 hours",
         "980 hours"];
 
-        this.q6 = ["Sometimes the US government is referred to with this name",
+        this.q6 = ["Another name for the US government:",
         "c",
         "Father Fred",
         "Aunt Sally",
