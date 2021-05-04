@@ -76,8 +76,6 @@ class Scene2 extends Phaser.Scene {
         
     }
 
-    // correct answer is 3 seconds
-    // wrong answer is 5 seconds
     titleScreen = () => {
         if (this.scene !== undefined) {
             this.scene.start('mainMenu');
