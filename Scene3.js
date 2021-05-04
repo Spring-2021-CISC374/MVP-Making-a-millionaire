@@ -91,9 +91,9 @@ class Scene3 extends Phaser.Scene {
         });
 
 
-        this.cashtext = this.add.text(625,25,"Cash:  "+this.game.registry.get("score"), {
-            font: "18px Arial", 
-            fill: "yellow",
+        this.cashtext = this.add.text(662,13,"Cash:  "+this.game.registry.get("score"), {
+            font: "22px Arial", 
+            fill: "greenyellow",
             stroke: 'black',
             strokeThickness: 3
         });

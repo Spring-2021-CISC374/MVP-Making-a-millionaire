@@ -30,9 +30,16 @@ class Scene2 extends Phaser.Scene {
             this.clickSound.play();
         })
 
-        this.cashtext = this.add.text(625,25,"Cash:  "+this.game.registry.get("score"), {
-            font: "18px Arial", 
-            fill: "yellow",
+        this.cashtext = this.add.text(662,13,"Cash:  "+this.game.registry.get("score"), {
+            font: "22px Arial", 
+            fill: "greenyellow",
+            stroke: 'black',
+            strokeThickness: 3
+        });
+
+        this.streaktext = this.add.text(662,50,"Streak:  "+this.game.registry.get("streak"), {
+            font: "22px Arial", 
+            fill: "greenyellow",
             stroke: 'black',
             strokeThickness: 3
         });
@@ -60,9 +67,11 @@ class Scene2 extends Phaser.Scene {
             this.scene.start('endScene')
         }
 
-        this.add.text(350,10,"Question #" + questionNumber, {
-            font: "20px Arial", 
-            fill: "yellow"})
+        this.add.text(330,10,"Question #" + questionNumber, {
+            font: "28px Arial", 
+            fill: "yellow",
+            stroke: 'black',
+            strokeThickness: 3})
         this.loadQuestion(question);
         
     }
@@ -76,9 +85,12 @@ class Scene2 extends Phaser.Scene {
         if (answer == "a") {
             this.question_insideA = this.add.image("85","461","question_inside").setInteractive()
             .on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, () => {
-                this.input.on('pointerdown', () => {if (this.answered <= 1) {this.add.text(350,100,"RIGHT", {
-                    font: "20px Arial", 
-                    fill: "yellow"})}})
+                this.input.on('pointerdown', () => {if (this.answered <= 1) {this.add.text(5,100,"CORRECT", {
+                    font: "158px Arial", 
+                    fill: "green",
+                    stroke: 'white',
+                    strokeThickness: 3
+                    })}})
                     //stuff to happen if right and chosen
                     this.answered++;
                     console.log("Score before: ", this.game.registry.get("score"))
@@ -87,15 +99,19 @@ class Scene2 extends Phaser.Scene {
                     this.questionAmount = 0;
                     setTimeout(this.titleScreen,3000);
                     this.game.registry.set("investment", this.game.registry.get("investment")*1.05);
+                    this.game.registry.set("streak",this.game.registry.get("streak") + 1);
 
             })
         //handles a being wrong
         } else {
             this.question_insideA = this.add.image("85","461","question_inside").setInteractive()
             .on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, () => {
-                this.input.on('pointerdown', () => {if (this.answered <= 1) {this.add.text(350,100,"WRONG", {
-                    font: "20px Arial", 
-                    fill: "yellow"})}})
+                this.input.on('pointerdown', () => {if (this.answered <= 1) {this.add.text(90,100,"WRONG", {
+                    font: "158px Arial", 
+                    fill: "red",
+                    stroke: 'white',
+                    strokeThickness: 3
+                    })}})
                     //stuff to happen if wrong and chosen
                     this.answered++;
                     console.log("Score: ", this.game.registry.get("score"))
@@ -104,6 +120,7 @@ class Scene2 extends Phaser.Scene {
                     this.questionAmount = 0;
                     setTimeout(this.titleScreen,3000);
                     this.game.registry.set("investment", this.game.registry.get("investment")*1.05);
+                    this.game.registry.set("streak",0);
 
             })
         }
@@ -112,9 +129,12 @@ class Scene2 extends Phaser.Scene {
         if (answer == "b") {
             this.question_insideB = this.add.image("445","461","question_inside").setInteractive()
             .on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, () => {
-                this.input.on('pointerdown', () => {if (this.answered <= 1) {this.add.text(350,100,"RIGHT", {
-                    font: "20px Arial", 
-                    fill: "yellow"})}})
+                this.input.on('pointerdown', () => {if (this.answered <= 1) {this.add.text(5,100,"CORRECT", {
+                    font: "158px Arial", 
+                    fill: "green",
+                    stroke: 'white',
+                    strokeThickness: 3
+                })}})
                     this.answered++;
                     console.log("Score before: ", this.game.registry.get("score"))
                     this.game.registry.set("score", this.game.registry.get("score")+this.questionAmount)
@@ -122,14 +142,18 @@ class Scene2 extends Phaser.Scene {
                     this.questionAmount = 0;
                     setTimeout(this.titleScreen,3000);
                     this.game.registry.set("investment", this.game.registry.get("investment")*1.05);
+                    this.game.registry.set("streak",this.game.registry.get("streak") + 1);
                     
             })
         } else {
                 this.question_insideB = this.add.image("445","461","question_inside").setInteractive()
             .on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, () => {
-                this.input.on('pointerdown', () => {if (this.answered <= 1) {this.add.text(350,100,"WRONG", {
-                    font: "20px Arial", 
-                    fill: "yellow"})}})
+                this.input.on('pointerdown', () => {if (this.answered <= 1) {this.add.text(90,100,"WRONG", {
+                    font: "158px Arial", 
+                    fill: "red",
+                    stroke: 'white',
+                    strokeThickness: 3
+                    })}})
                     this.answered++;
                     console.log("Score: ", this.game.registry.get("score"))
                     this.game.registry.set("score", this.game.registry.get("score")-this.questionAmount)
@@ -137,6 +161,7 @@ class Scene2 extends Phaser.Scene {
                     this.questionAmount = 0;
                     setTimeout(this.titleScreen,3000);
                     this.game.registry.set("investment", this.game.registry.get("investment")*1.05);
+                    this.game.registry.set("streak",0);
             })
         }
         this.question_insideB.setOrigin(0,0);
@@ -144,9 +169,12 @@ class Scene2 extends Phaser.Scene {
         if (answer == "c") {
             this.question_insideC = this.add.image("85","526","question_inside").setInteractive()
             .on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, () => {
-                this.input.on('pointerdown', () => {if (this.answered <= 1) {this.add.text(350,100,"RIGHT", {
-                    font: "20px Arial", 
-                    fill: "yellow"})}})
+                this.input.on('pointerdown', () => {if (this.answered <= 1) {this.add.text(5,100,"CORRECT", {
+                    font: "158px Arial", 
+                    fill: "green",
+                    stroke: 'white',
+                    strokeThickness: 3
+                    })}})
                     this.answered++;
                     console.log("Score before: ", this.game.registry.get("score"))
                     this.game.registry.set("score", this.game.registry.get("score")+questionAmount)
@@ -154,13 +182,17 @@ class Scene2 extends Phaser.Scene {
                     this.questionAmount = 0;
                     setTimeout(this.titleScreen,3000);
                     this.game.registry.set("investment", this.game.registry.get("investment")*1.05);
+                    this.game.registry.set("streak",this.game.registry.get("streak") + 1);
             })
         } else {
                 this.question_insideC = this.add.image("85","526","question_inside").setInteractive()
             .on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, () => {
-                this.input.on('pointerdown', () => {if (this.answered <= 1) {this.add.text(350,100,"WRONG", {
-                    font: "20px Arial", 
-                    fill: "yellow"})}})
+                this.input.on('pointerdown', () => {if (this.answered <= 1) {this.add.text(90,100,"WRONG", {
+                    font: "158px Arial", 
+                    fill: "red",
+                    stroke: 'white',
+                    strokeThickness: 3
+                    })}})
                     this.answered++;
                     console.log("Score: ", this.game.registry.get("score"))
                     this.game.registry.set("score", this.game.registry.get("score")-this.questionAmount)
@@ -168,6 +200,7 @@ class Scene2 extends Phaser.Scene {
                     this.questionAmount = 0;
                     setTimeout(this.titleScreen,3000);
                     this.game.registry.set("investment", this.game.registry.get("investment")*1.05);
+                    this.game.registry.set("streak",0);
             })
         }
         this.question_insideC.setOrigin(0,0);
@@ -175,9 +208,12 @@ class Scene2 extends Phaser.Scene {
         if (answer == "d") {
             this.question_insideD = this.add.image("445","526","question_inside").setInteractive()
             .on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, () => {
-                this.input.on('pointerdown', () => {if (this.answered <= 1) {this.add.text(350,100,"RIGHT", {
-                    font: "20px Arial", 
-                    fill: "yellow"})}})
+                this.input.on('pointerdown', () => {if (this.answered <= 1) {this.add.text(5,100,"CORRECT", {
+                    font: "158px Arial", 
+                    fill: "green",
+                    stroke: 'white',
+                    strokeThickness: 3
+                    })}})
                     this.answered++;
                     console.log("Score before: ", this.game.registry.get("score"))
                     this.game.registry.set("score", this.game.registry.get("score")+questionAmount)
@@ -185,13 +221,17 @@ class Scene2 extends Phaser.Scene {
                     this.questionAmount = 0;
                     setTimeout(this.titleScreen,3000);
                     this.game.registry.set("investment", this.game.registry.get("investment")*1.05);
+                    this.game.registry.set("streak",this.game.registry.get("streak") + 1);
             })
         } else {
                 this.question_insideD = this.add.image("445","526","question_inside").setInteractive()
             .on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, () => {
-                this.input.on('pointerdown', () => {if (this.answered <= 1) {this.add.text(350,100,"WRONG", {
-                    font: "20px Arial", 
-                    fill: "yellow"})}})
+                this.input.on('pointerdown', () => {if (this.answered <= 1) {this.add.text(90,100,"WRONG", {
+                    font: "158px Arial", 
+                    fill: "red",
+                    stroke: 'white',
+                    strokeThickness: 3
+                    })}})
                     this.answered++;
                     console.log("Score before: ", this.game.registry.get("score"))
                     this.game.registry.set("score", this.game.registry.get("score")-this.questionAmount)
@@ -199,6 +239,7 @@ class Scene2 extends Phaser.Scene {
                     this.questionAmount = 0;
                     setTimeout(this.titleScreen,3000);
                     this.game.registry.set("investment", this.game.registry.get("investment")*1.05);
+                    this.game.registry.set("streak",0);
             })
         }
         this.question_insideD.setOrigin(0,0);
@@ -207,23 +248,33 @@ class Scene2 extends Phaser.Scene {
 
         this.add.text(117,372,question[0], {
             font: "25px Helvetica", 
-            fill: "yellow"
+            fill: "yellow",
+            stroke: 'black',
+            strokeThickness: 1
         });
         this.add.text(85,468,question[2], {
             font: "20px Arial", 
-            fill: "yellow"
+            fill: "yellow",
+            stroke: 'black',
+            strokeThickness: 1
         });
         this.add.text(445,468,question[3], {
             font: "20px Arial", 
-            fill: "yellow"
+            fill: "yellow",
+            stroke: 'black',
+            strokeThickness: 1
         });
         this.add.text(85,533,question[4], {
             font: "20px Arial", 
-            fill: "yellow"
+            fill: "yellow",
+            stroke: 'black',
+            strokeThickness: 1
         });
         this.add.text(445,533,question[5], {
             font: "20px Arial", 
-            fill: "yellow"
+            fill: "yellow",
+            stroke: 'black',
+            strokeThickness: 1
         });
     }
 
