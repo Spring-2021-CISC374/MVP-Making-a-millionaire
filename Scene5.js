@@ -28,6 +28,8 @@ class Scene5 extends Phaser.Scene {
        
 
     }
+
+    update() {}
 }
 
 
