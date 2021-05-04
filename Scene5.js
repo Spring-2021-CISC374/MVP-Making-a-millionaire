@@ -24,7 +24,9 @@ class Scene5 extends Phaser.Scene {
             fill: "yellow"
         });
         
-        this.add.text (275, 300,"FINAL SCORE" + finalScore);
+        this.add.text (215, 300,"FINAL SCORE: " + finalScore,{
+            font: "30px Arial", 
+            fill: "yellow"});
        
 
     }

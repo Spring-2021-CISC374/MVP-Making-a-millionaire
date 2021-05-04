@@ -15,6 +15,8 @@ class Scene2 extends Phaser.Scene {
         let config = this.game.config;
 
         this.questionAmount = 100;
+        this.questionAmountRight = this.questionAmount*(1 + this.game.registry.get("streak") * 0.1)
+        this.questionAmountWrong = this.questionAmount
         this.answered = 0;
 
         this.clickSound = this.sound.add("click");
@@ -62,7 +64,7 @@ class Scene2 extends Phaser.Scene {
         var questionNumber = this.game.registry.get("questionNumber");
         var question = this.game.registry.get("questionBank")[questionNumber -1];
 
-        if (questionNumber > 10) {
+        if (questionNumber > 9) {
             //currently does not fully work
             this.scene.start('endScene')
         }
@@ -79,7 +81,7 @@ class Scene2 extends Phaser.Scene {
     loadQuestion(question) {
         //sets answer as "a" "b" "c" or "d"
         var answer = question[1];
-
+        console.log(this.game.registry.get("questionNumber"))
 
         //handles a being correct
         if (answer == "a") {
@@ -94,7 +96,7 @@ class Scene2 extends Phaser.Scene {
                     //stuff to happen if right and chosen
                     this.answered++;
                     console.log("Score before: ", this.game.registry.get("score"))
-                    this.game.registry.set("score", this.game.registry.get("score")+this.questionAmount)
+                    this.game.registry.set("score", this.game.registry.get("score")+this.questionAmountRight)
                     console.log("Score after: ", this.game.registry.get("score"))
                     this.questionAmount = 0;
                     setTimeout(this.titleScreen,3000);
@@ -115,7 +117,7 @@ class Scene2 extends Phaser.Scene {
                     //stuff to happen if wrong and chosen
                     this.answered++;
                     console.log("Score: ", this.game.registry.get("score"))
-                    this.game.registry.set("score", this.game.registry.get("score")-this.questionAmount)
+                    this.game.registry.set("score", this.game.registry.get("score")-this.questionAmountWrong)
                     console.log("Score: ", this.game.registry.get("score"))
                     this.questionAmount = 0;
                     setTimeout(this.titleScreen,3000);
@@ -137,7 +139,7 @@ class Scene2 extends Phaser.Scene {
                 })}})
                     this.answered++;
                     console.log("Score before: ", this.game.registry.get("score"))
-                    this.game.registry.set("score", this.game.registry.get("score")+this.questionAmount)
+                    this.game.registry.set("score", this.game.registry.get("score")+this.questionAmountRight)
                     console.log("Score after: ", this.game.registry.get("score"))
                     this.questionAmount = 0;
                     setTimeout(this.titleScreen,3000);
@@ -156,7 +158,7 @@ class Scene2 extends Phaser.Scene {
                     })}})
                     this.answered++;
                     console.log("Score: ", this.game.registry.get("score"))
-                    this.game.registry.set("score", this.game.registry.get("score")-this.questionAmount)
+                    this.game.registry.set("score", this.game.registry.get("score")-this.questionAmountWrong)
                     console.log("Score: ", this.game.registry.get("score"))
                     this.questionAmount = 0;
                     setTimeout(this.titleScreen,3000);
@@ -177,7 +179,7 @@ class Scene2 extends Phaser.Scene {
                     })}})
                     this.answered++;
                     console.log("Score before: ", this.game.registry.get("score"))
-                    this.game.registry.set("score", this.game.registry.get("score")+this.questionAmount)
+                    this.game.registry.set("score", this.game.registry.get("score")+this.questionAmountRight)
                     console.log("Score after: ", this.game.registry.get("score"))
                     this.questionAmount = 0;
                     setTimeout(this.titleScreen,3000);
@@ -195,7 +197,7 @@ class Scene2 extends Phaser.Scene {
                     })}})
                     this.answered++;
                     console.log("Score: ", this.game.registry.get("score"))
-                    this.game.registry.set("score", this.game.registry.get("score")-this.questionAmount)
+                    this.game.registry.set("score", this.game.registry.get("score")-this.questionAmountWrong)
                     console.log("Score: ", this.game.registry.get("score"))
                     this.questionAmount = 0;
                     setTimeout(this.titleScreen,3000);
@@ -216,7 +218,7 @@ class Scene2 extends Phaser.Scene {
                     })}})
                     this.answered++;
                     console.log("Score before: ", this.game.registry.get("score"))
-                    this.game.registry.set("score", this.game.registry.get("score")+this.questionAmount)
+                    this.game.registry.set("score", this.game.registry.get("score")+this.questionAmountRight)
                     console.log("Score after: ", this.game.registry.get("score"))
                     this.questionAmount = 0;
                     setTimeout(this.titleScreen,3000);
@@ -234,7 +236,7 @@ class Scene2 extends Phaser.Scene {
                     })}})
                     this.answered++;
                     console.log("Score before: ", this.game.registry.get("score"))
-                    this.game.registry.set("score", this.game.registry.get("score")-this.questionAmount)
+                    this.game.registry.set("score", this.game.registry.get("score")-this.questionAmountWrong)
                     console.log("Score after: ", this.game.registry.get("score"))
                     this.questionAmount = 0;
                     setTimeout(this.titleScreen,3000);

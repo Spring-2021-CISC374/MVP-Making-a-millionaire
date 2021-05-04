@@ -16,6 +16,7 @@ class Scene1 extends Phaser.Scene {
         this.load.image("settings_btn","assets/images/settings_btn.png");
         this.load.audio("click","sounds/goodclick.mp3");
         this.load.audio("backgroundMusic","sounds/suspense.mp3");
+        
     }
 
     create() {
@@ -64,8 +65,15 @@ class Scene1 extends Phaser.Scene {
             stroke: 'black',
             strokeThickness: 3
         });
-       
 
+        //prevents randomizing questions every lobby trip to avoid duplicates
+        if (this.game.registry.get("questionNumber") == 0) {
+            this.getQuestions();
+        }
+
+    }
+
+    getQuestions() {
         // Is this an efficent way to code in the questions? Absolitely not.
         // Is it an effective way? YES.
 
@@ -174,6 +182,7 @@ class Scene1 extends Phaser.Scene {
         "Roth IRA",
         "Bitcoin"];
         */
+        
         let questions = [this.q1,this.q2,this.q3,this.q4,this.q5,this.q6,this.q7,this.q8,this.q9,this.q10]
         for (var i = questions.length - 1; i > 0; i--) {
             var j = Math.floor(Math.random() * (i + 1));
