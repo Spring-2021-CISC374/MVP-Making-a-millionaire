@@ -64,17 +64,12 @@ class Scene2 extends Phaser.Scene {
         var questionNumber = this.game.registry.get("questionNumber");
         var question = this.game.registry.get("questionBank")[questionNumber -1];
 
-        if (questionNumber > 9) {
-            //currently does not fully work
-            this.scene.start('endScene')
-        }
-
         this.add.text(330,10,"Question #" + questionNumber, {
             font: "28px Arial", 
             fill: "yellow",
             stroke: 'black',
             strokeThickness: 3})
-        this.loadQuestion(question);
+        this.loadQuestion(question, questionNumber);
         
     }
 
@@ -84,7 +79,17 @@ class Scene2 extends Phaser.Scene {
         }
     }
 
-    loadQuestion(question) {
+    loadQuestion(question, questionNumber) {
+        const checkIfFinalQuestion = (questionNumber) => {
+            /*
+            at the moment the value needs to be one less than the total number of questions.
+            ex. 2 questions, value = 1, 5 questions, value = 4
+            */
+            if (questionNumber > 1) {
+                this.scene.remove('mainMenu')
+                this.scene.start('endScene');
+            }
+        };
         //sets answer as "a" "b" "c" or "d"
         var answer = question[1];
         console.log(this.game.registry.get("questionNumber"))
@@ -105,6 +110,7 @@ class Scene2 extends Phaser.Scene {
                     this.game.registry.set("score", this.game.registry.get("score")+this.questionAmountRight)
                     console.log("Score after: ", this.game.registry.get("score"))
                     this.questionAmount = 0;
+                    checkIfFinalQuestion(questionNumber)
                     setTimeout(this.titleScreen,3000);
                     this.game.registry.set("investment", this.game.registry.get("investment")*1.05);
                     this.game.registry.set("streak",this.game.registry.get("streak") + 1);
@@ -126,6 +132,7 @@ class Scene2 extends Phaser.Scene {
                     this.game.registry.set("score", this.game.registry.get("score")-this.questionAmountWrong)
                     console.log("Score: ", this.game.registry.get("score"))
                     this.questionAmount = 0;
+                    checkIfFinalQuestion(questionNumber)
                     setTimeout(this.titleScreen,5000);
                     this.game.registry.set("investment", this.game.registry.get("investment")*1.05);
                     this.game.registry.set("streak",0);
@@ -148,6 +155,7 @@ class Scene2 extends Phaser.Scene {
                     this.game.registry.set("score", this.game.registry.get("score")+this.questionAmountRight)
                     console.log("Score after: ", this.game.registry.get("score"))
                     this.questionAmount = 0;
+                    checkIfFinalQuestion(questionNumber)
                     setTimeout(this.titleScreen,3000);
                     this.game.registry.set("investment", this.game.registry.get("investment")*1.05);
                     this.game.registry.set("streak",this.game.registry.get("streak") + 1);
@@ -167,6 +175,7 @@ class Scene2 extends Phaser.Scene {
                     this.game.registry.set("score", this.game.registry.get("score")-this.questionAmountWrong)
                     console.log("Score: ", this.game.registry.get("score"))
                     this.questionAmount = 0;
+                    checkIfFinalQuestion(questionNumber)
                     setTimeout(this.titleScreen,5000);
                     this.game.registry.set("investment", this.game.registry.get("investment")*1.05);
                     this.game.registry.set("streak",0);
@@ -188,6 +197,7 @@ class Scene2 extends Phaser.Scene {
                     this.game.registry.set("score", this.game.registry.get("score")+this.questionAmountRight)
                     console.log("Score after: ", this.game.registry.get("score"))
                     this.questionAmount = 0;
+                    checkIfFinalQuestion(questionNumber)
                     setTimeout(this.titleScreen,3000);
                     this.game.registry.set("investment", this.game.registry.get("investment")*1.05);
                     this.game.registry.set("streak",this.game.registry.get("streak") + 1);
@@ -206,6 +216,7 @@ class Scene2 extends Phaser.Scene {
                     this.game.registry.set("score", this.game.registry.get("score")-this.questionAmountWrong)
                     console.log("Score: ", this.game.registry.get("score"))
                     this.questionAmount = 0;
+                    checkIfFinalQuestion(questionNumber)
                     setTimeout(this.titleScreen,5000);
                     this.game.registry.set("investment", this.game.registry.get("investment")*1.05);
                     this.game.registry.set("streak",0);
@@ -227,6 +238,7 @@ class Scene2 extends Phaser.Scene {
                     this.game.registry.set("score", this.game.registry.get("score")+this.questionAmountRight)
                     console.log("Score after: ", this.game.registry.get("score"))
                     this.questionAmount = 0;
+                    checkIfFinalQuestion(questionNumber)
                     setTimeout(this.titleScreen,3000);
                     this.game.registry.set("investment", this.game.registry.get("investment")*1.05);
                     this.game.registry.set("streak",this.game.registry.get("streak") + 1);
@@ -245,6 +257,7 @@ class Scene2 extends Phaser.Scene {
                     this.game.registry.set("score", this.game.registry.get("score")-this.questionAmountWrong)
                     console.log("Score after: ", this.game.registry.get("score"))
                     this.questionAmount = 0;
+                    checkIfFinalQuestion(questionNumber)
                     setTimeout(this.titleScreen,5000);
                     this.game.registry.set("investment", this.game.registry.get("investment")*1.05);
                     this.game.registry.set("streak",0);

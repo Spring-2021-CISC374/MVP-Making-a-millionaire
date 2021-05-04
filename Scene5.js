@@ -4,7 +4,7 @@ class Scene5 extends Phaser.Scene {
     }
 
     preload() {
-
+        this.load.image("start_btn","assets/images/start_btn.png");
     }
 
     create() {
@@ -28,6 +28,13 @@ class Scene5 extends Phaser.Scene {
             font: "30px Arial", 
             fill: "yellow"});
        
+        this.startBtn = this.add.image("400", "275", "start_btn")
+        .setInteractive()
+        .on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, () => {
+            this.game.destroy(true);
+            this.input.on('pointerdown', () => startGame())
+            this.clickSound.play();
+        })
 
     }
 
