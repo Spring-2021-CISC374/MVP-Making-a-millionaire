@@ -9,10 +9,12 @@ class Scene3 extends Phaser.Scene {
 
     create() {
         let config = this.game.config;
+        this.clickSound = this.sound.add("click");
+        this.clickSound = this.sound.add("click");
 
-        this.clickSound = this.sound.add("click");
-        
-        this.clickSound = this.sound.add("click");
+        this.streak_val = 200;
+        this.fifty_val = 150;
+        this.audience_val = 120;
 
         this.backBtn = this.add.image("60", "25", "back_btn")
         .setInteractive()
@@ -24,35 +26,84 @@ class Scene3 extends Phaser.Scene {
 
         this.investBtn = this.add.image("400", "500", "invest_btn")
         .setInteractive()
+        .on(Phaser.Input.Events.GAMEOBJECT_POINTER_OVER, () => {
+            this.investBtn.setScale(1.15);
+            this.game.canvas.style.cursor = "pointer";
+        })
+        .on(Phaser.Input.Events.GAMEOBJECT_POINTER_OUT, () => {
+            this.investBtn.setScale(1);
+            this.game.canvas.style.cursor = "default";
+        })
         .on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, () => {
             this.clickSound.play();
             //this.input.on('pointerdown', () => this.scene.start('mainMenu'))
-            this.buy("investment", 100, this.invest_text);
+            this.buy("investment", this.streak_val, this.invest_text);
             //this.game.registry.set("investment", this.game.registry.get("investment")+100);
         })
 
         this.streak = this.add.image("200", "235", "streak_img")
         .setInteractive()
+        .on(Phaser.Input.Events.GAMEOBJECT_POINTER_OVER, () => {
+
+            if (this.game.registry.get("score") >= this.streak_val) {
+                this.streak.setScale(1.15);
+                this.game.canvas.style.cursor = "pointer";
+            } else {
+                this.streak.tint = 0xA3A3A3;
+            }
+        })
+        .on(Phaser.Input.Events.GAMEOBJECT_POINTER_OUT, () => {
+            this.streak.setScale(1);
+            this.game.canvas.style.cursor = "default";
+            this.streak.clearTint();
+        })
         .on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, () => {
             //this.input.on('pointerdown', () => this.scene.start('mainMenu'))
-            //this.streak.setScale(1.25)
+            //this.streak.setScale(1.15)
             this.buy("streak", 200, this.streak_owned);
         })
+        
 
         this.fiftylifeline = this.add.image("400", "235", "5050_img")
         .setInteractive()
+        .on(Phaser.Input.Events.GAMEOBJECT_POINTER_OVER, () => {
+            if (this.game.registry.get("score") >= this.fifty_val) {
+                this.fiftylifeline.setScale(1.15);
+                this.game.canvas.style.cursor = "pointer";
+            } else {
+                this.fiftylifeline.tint = 0xA3A3A3;
+            }
+        })
+        .on(Phaser.Input.Events.GAMEOBJECT_POINTER_OUT, () => {
+            this.fiftylifeline.setScale(1);
+            this.game.canvas.style.cursor = "default";
+            this.fiftylifeline.clearTint();
+        })
         .on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, () => {
             //this.input.on('pointerdown', () => this.scene.start('mainMenu'))
-            //this.streak.setScale(1.25)
-            this.buy("fifty", 150, this.fifty_owned);
+            //this.streak.setScale(1.15)
+            this.buy("fifty", this.fifty_val, this.fifty_owned);
         })
 
         this.audiencelifeline = this.add.image("600", "235", "audience_img")
         .setInteractive()
+        .on(Phaser.Input.Events.GAMEOBJECT_POINTER_OVER, () => {
+            if (this.game.registry.get("score") >= this.audience_val) {
+                this.audiencelifeline.setScale(1.15);
+                this.game.canvas.style.cursor = "pointer";
+            } else {
+                this.audiencelifeline.tint = 0xA3A3A3;
+            }
+        })
+        .on(Phaser.Input.Events.GAMEOBJECT_POINTER_OUT, () => {
+            this.audiencelifeline.setScale(1);
+            this.game.canvas.style.cursor = "default";
+            this.audiencelifeline.clearTint();
+        })
         .on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, () => {
             //this.input.on('pointerdown', () => this.scene.start('mainMenu'))
-            //this.streak.setScale(1.25)
-            this.buy("audience", 120, this.audience_owned);
+            //this.streak.setScale(1.15)
+            this.buy("audience", this.audience_val, this.audience_owned);
         })
 
         this.add.text(350,120,"Shop", {
@@ -112,7 +163,7 @@ class Scene3 extends Phaser.Scene {
         /*
         this.streak.on('pointerover',function(pointer){
             this.enlarge_image();
-            //this.streak.setScale(1.25);
+            //this.streak.setScale(1.15);
         })
         
         this.streak.on('pointerout',function(pointer){
@@ -124,8 +175,11 @@ class Scene3 extends Phaser.Scene {
     buy (name, price, owned_text) {
         if (this.game.registry.get("score") >= price) {
             this.game.registry.set("score", this.game.registry.get("score") - price);
-            if (name == "investment") {this.game.registry.set(name, this.game.registry.get(name)+100);}
-            else {this.game.registry.set(name, this.game.registry.get(name)+1);}
+            if (name == "investment") {
+                this.game.registry.set(name, this.game.registry.get(name)+100);
+            } else {
+                this.game.registry.set(name, this.game.registry.get(name)+1);
+            }
             console.log("Quantity: ", this.game.registry.get(name));
             this.cashtext.setText("Cash:  "+this.game.registry.get("score"));
         }
@@ -138,7 +192,7 @@ class Scene3 extends Phaser.Scene {
     }
 
     enlarge_image() {
-        this.streak.setScale(1.25);
+        this.streak.setScale(1.15);
     } 
 
     decrease_image() {
