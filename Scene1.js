@@ -174,7 +174,14 @@ class Scene1 extends Phaser.Scene {
         "Roth IRA",
         "Bitcoin"];
         */
-        this.game.registry.set("questionBank",[this.q1,this.q2,this.q3,this.q4,this.q5,this.q6,this.q7,this.q8,this.q9,this.q10]);
+        let questions = [this.q1,this.q2,this.q3,this.q4,this.q5,this.q6,this.q7,this.q8,this.q9,this.q10]
+        for (var i = questions.length - 1; i > 0; i--) {
+            var j = Math.floor(Math.random() * (i + 1));
+            var temp = questions[i];
+            questions[i] = questions[j];
+            questions[j] = temp;
+        }
+        this.game.registry.set("questionBank",questions);
     }
 }
 

@@ -3,7 +3,7 @@ window.onload =  function() {
         width: 800,
         height: 600,
         bakckgroundColor: 0x000000,
-        scene: [Scene1, Scene2, Scene3, Scene4],
+        scene: [Scene1, Scene2, Scene3, Scene4, Scene5],
         pixelArt: true,
         physics: {
             default: "arcade",
@@ -21,8 +21,6 @@ window.onload =  function() {
     game.registry.set("questionNumber",0)
     game.registry.set("investment",0)
     game.registry.set("streak",0)
-
-
 
 
     /*
