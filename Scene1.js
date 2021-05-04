@@ -133,7 +133,7 @@ class Scene1 extends Phaser.Scene {
         "Foodstamps",
         "Medicare"];
 
-        this.q9 = ["What is a common trait of financiallly secure people?",
+        this.q9 = ["What is a common trait of financially secure people?",
         "c",
         "Quit school before 18",
         "Always keep $500 on them",

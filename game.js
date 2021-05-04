@@ -14,8 +14,8 @@ window.onload =  function() {
     }
     var game = new Phaser.Game(config);
 
-    game.registry.set("score", 100)
-    game.registry.set("streak", 0)
+    game.registry.set("score", 750)
+    game.registry.set("multiplier", 0)
     game.registry.set("fifty", 0)
     game.registry.set("audience", 0)
     game.registry.set("questionNumber",0)

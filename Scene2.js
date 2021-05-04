@@ -32,6 +32,93 @@ class Scene2 extends Phaser.Scene {
             this.input.on('pointerdown', () => this.scene.start('mainMenu'))
             this.clickSound.play();
         })*/
+        this.mult = this.add.image("45", "60", "streak_img")
+        .setInteractive()
+        .on(Phaser.Input.Events.GAMEOBJECT_POINTER_OVER, () => {
+
+            if (this.game.registry.get("multiplier") > 0) {
+                this.mult.setScale(0.7);
+                this.game.canvas.style.cursor = "pointer";
+            } else {
+                this.mult.tint = 0xA3A3A3;
+            }
+        })
+        .on(Phaser.Input.Events.GAMEOBJECT_POINTER_OUT, () => {
+            this.mult.setScale(0.7);
+            this.game.canvas.style.cursor = "default";
+        })
+        .on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, () => {
+            //this.input.on('pointerdown', () => this.scene.start('mainMenu'))
+            //this.streak.setScale(1.15)
+            this.buy("fifty", this.fifty_val, this.fifty_owned);
+        })
+
+        if (this.game.registry.get("multiplier") == 0) {
+            this.mult.tint = 0xA3A3A3;
+        } else {
+            this.mult.clearTint();
+        }
+        
+        this.mult.setScale(0.7);
+
+
+        this.fiftylifeline = this.add.image("45", "150", "5050_img")
+        .setInteractive()
+        .on(Phaser.Input.Events.GAMEOBJECT_POINTER_OVER, () => {
+
+            if (this.game.registry.get("fifty") > 0) {
+                this.fiftylifeline.setScale(0.7);
+                this.game.canvas.style.cursor = "pointer";
+            } else {
+                this.fiftylifeline.tint = 0xA3A3A3;
+            }
+        })
+        .on(Phaser.Input.Events.GAMEOBJECT_POINTER_OUT, () => {
+            this.fiftylifeline.setScale(0.7);
+            this.game.canvas.style.cursor = "default";
+        })
+        .on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, () => {
+            //this.input.on('pointerdown', () => this.scene.start('mainMenu'))
+            //this.streak.setScale(1.15)
+            this.buy("fifty", this.fifty_val, this.fifty_owned);
+        })
+
+        if (this.game.registry.get("fifty") == 0) {
+            this.fiftylifeline.tint = 0xA3A3A3;
+        } else {
+            this.fiftylifeline.clearTint();
+        }
+        
+        this.fiftylifeline.setScale(0.7);
+
+        this.audience = this.add.image("45", "240", "audience_img")
+        .setInteractive()
+        .on(Phaser.Input.Events.GAMEOBJECT_POINTER_OVER, () => {
+
+            if (this.game.registry.get("audience") > 0) {
+                this.audience.setScale(0.7);
+                this.game.canvas.style.cursor = "pointer";
+            } else {
+                this.audience.tint = 0xA3A3A3;
+            }
+        })
+        .on(Phaser.Input.Events.GAMEOBJECT_POINTER_OUT, () => {
+            this.audience.setScale(0.7);
+            this.game.canvas.style.cursor = "default";
+        })
+        .on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, () => {
+            //this.input.on('pointerdown', () => this.scene.start('mainMenu'))
+            //this.streak.setScale(1.15)
+            this.buy("fifty", this.fifty_val, this.fifty_owned);
+        })
+
+        if (this.game.registry.get("audience") == 0) {
+            this.audience.tint = 0xA3A3A3;
+        } else {
+            this.audience.clearTint();
+        }
+        
+        this.audience.setScale(0.7);
 
         this.cashtext = this.add.text(662,13,"Cash:  "+this.game.registry.get("score"), {
             font: "22px Arial", 
@@ -115,8 +202,8 @@ class Scene2 extends Phaser.Scene {
         } else {
             this.question_insideA = this.add.image("85","461","question_inside").setInteractive()
             .on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, () => {
-                this.input.on('pointerdown', () => {if (this.answered <= 1) {this.add.text(90,100,"WRONG", {
-                    font: "158px Arial", 
+                this.input.on('pointerdown', () => {if (this.answered <= 1) {this.add.text(3,100,"INCORRECT", {
+                    font: "130px Arial", 
                     fill: "red",
                     stroke: 'white',
                     strokeThickness: 3
@@ -133,6 +220,15 @@ class Scene2 extends Phaser.Scene {
 
             })
         }
+
+        this.question_insideA
+        .setInteractive()
+        .on(Phaser.Input.Events.GAMEOBJECT_POINTER_OVER, () => {
+            this.game.canvas.style.cursor = "pointer";
+        })
+        .on(Phaser.Input.Events.GAMEOBJECT_POINTER_OUT, () => {
+            this.game.canvas.style.cursor = "default";
+        });
         this.question_insideA.setOrigin(0,0);
 
         if (answer == "b") {
@@ -157,8 +253,8 @@ class Scene2 extends Phaser.Scene {
         } else {
                 this.question_insideB = this.add.image("445","461","question_inside").setInteractive()
             .on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, () => {
-                this.input.on('pointerdown', () => {if (this.answered <= 1) {this.add.text(90,100,"WRONG", {
-                    font: "158px Arial", 
+                this.input.on('pointerdown', () => {if (this.answered <= 1) {this.add.text(3,100,"INCORRECT", {
+                    font: "130px Arial", 
                     fill: "red",
                     stroke: 'white',
                     strokeThickness: 3
@@ -173,6 +269,14 @@ class Scene2 extends Phaser.Scene {
                     this.game.registry.set("streak",0);
             })
         }
+        this.question_insideB
+        .setInteractive()
+        .on(Phaser.Input.Events.GAMEOBJECT_POINTER_OVER, () => {
+            this.game.canvas.style.cursor = "pointer";
+        })
+        .on(Phaser.Input.Events.GAMEOBJECT_POINTER_OUT, () => {
+            this.game.canvas.style.cursor = "default";
+        });
         this.question_insideB.setOrigin(0,0);
 
         if (answer == "c") {
@@ -196,8 +300,8 @@ class Scene2 extends Phaser.Scene {
         } else {
                 this.question_insideC = this.add.image("85","526","question_inside").setInteractive()
             .on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, () => {
-                this.input.on('pointerdown', () => {if (this.answered <= 1) {this.add.text(90,100,"WRONG", {
-                    font: "158px Arial", 
+                this.input.on('pointerdown', () => {if (this.answered <= 1) {this.add.text(3,100,"INCORRECT", {
+                    font: "130px Arial", 
                     fill: "red",
                     stroke: 'white',
                     strokeThickness: 3
@@ -212,6 +316,14 @@ class Scene2 extends Phaser.Scene {
                     this.game.registry.set("streak",0);
             })
         }
+        this.question_insideC
+        .setInteractive()
+        .on(Phaser.Input.Events.GAMEOBJECT_POINTER_OVER, () => {
+            this.game.canvas.style.cursor = "pointer";
+        })
+        .on(Phaser.Input.Events.GAMEOBJECT_POINTER_OUT, () => {
+            this.game.canvas.style.cursor = "default";
+        });
         this.question_insideC.setOrigin(0,0);
 
         if (answer == "d") {
@@ -235,8 +347,8 @@ class Scene2 extends Phaser.Scene {
         } else {
                 this.question_insideD = this.add.image("445","526","question_inside").setInteractive()
             .on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, () => {
-                this.input.on('pointerdown', () => {if (this.answered <= 1) {this.add.text(90,100,"WRONG", {
-                    font: "158px Arial", 
+                this.input.on('pointerdown', () => {if (this.answered <= 1) {this.add.text(3,100,"INCORRECT", {
+                    font: "130px Arial", 
                     fill: "red",
                     stroke: 'white',
                     strokeThickness: 3
@@ -252,6 +364,14 @@ class Scene2 extends Phaser.Scene {
             })
         }
         this.question_insideD.setOrigin(0,0);
+        this.question_insideD
+        .setInteractive()
+        .on(Phaser.Input.Events.GAMEOBJECT_POINTER_OVER, () => {
+            this.game.canvas.style.cursor = "pointer";
+        })
+        .on(Phaser.Input.Events.GAMEOBJECT_POINTER_OUT, () => {
+            this.game.canvas.style.cursor = "default";
+        });
 
         this.cashtext.setText("Cash:  "+this.game.registry.get("score"));
 

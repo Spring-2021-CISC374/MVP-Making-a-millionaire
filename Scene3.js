@@ -15,6 +15,7 @@ class Scene3 extends Phaser.Scene {
         this.streak_val = 200;
         this.fifty_val = 150;
         this.audience_val = 120;
+        this.min_invest = 200;
 
         this.backBtn = this.add.image("60", "25", "back_btn")
         .setInteractive()
@@ -27,17 +28,22 @@ class Scene3 extends Phaser.Scene {
         this.investBtn = this.add.image("400", "500", "invest_btn")
         .setInteractive()
         .on(Phaser.Input.Events.GAMEOBJECT_POINTER_OVER, () => {
-            this.investBtn.setScale(1.15);
-            this.game.canvas.style.cursor = "pointer";
+            if (this.game.registry.get("score") >= this.min_invest) {
+                this.investBtn.setScale(1.15);
+                this.game.canvas.style.cursor = "pointer";
+            } else {
+                this.investBtn.tint = 0xA3A3A3;
+            }
         })
         .on(Phaser.Input.Events.GAMEOBJECT_POINTER_OUT, () => {
             this.investBtn.setScale(1);
             this.game.canvas.style.cursor = "default";
+            this.investBtn.clearTint();
         })
         .on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, () => {
             this.clickSound.play();
             //this.input.on('pointerdown', () => this.scene.start('mainMenu'))
-            this.buy("investment", this.streak_val, this.invest_text);
+            this.buy("investment", this.min_invest, this.invest_text);
             //this.game.registry.set("investment", this.game.registry.get("investment")+100);
         })
 
@@ -45,7 +51,7 @@ class Scene3 extends Phaser.Scene {
         .setInteractive()
         .on(Phaser.Input.Events.GAMEOBJECT_POINTER_OVER, () => {
 
-            if (this.game.registry.get("score") >= this.streak_val) {
+            if (this.game.registry.get("score") >= this.streak_val && this.game.registry.get("multiplier") == 0) {
                 this.streak.setScale(1.15);
                 this.game.canvas.style.cursor = "pointer";
             } else {
@@ -60,7 +66,25 @@ class Scene3 extends Phaser.Scene {
         .on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, () => {
             //this.input.on('pointerdown', () => this.scene.start('mainMenu'))
             //this.streak.setScale(1.15)
-            this.buy("streak", 200, this.streak_owned);
+            if (this.game.registry.get("score") >= this.streak_val && this.game.registry.get("multiplier") == 0) {
+                this.buy("multiplier", 200, this.streak_owned);
+            } else {
+                this.multiplier_text = this.add.text(250,400,"Can only purchase single multiplier at a time", {
+                    font: "16px Arial", 
+                    fill: "yellow",
+                    visible: false
+                });
+                //multiplier_text.visible = false;
+
+                
+                this.game.time.events.add(
+                    0, 
+                    function() {    
+                        this.game.add.tween(this.multiplier_text).to({alpha: 1}, 1000, Phaser.Easing.Linear.None, true);
+                        this.game.add.tween(this.multiplier_text).to({alpha: 0}, 1000, Phaser.Easing.Linear.None, true);
+                    }, 
+                this);
+            }
         })
         
 
@@ -126,7 +150,7 @@ class Scene3 extends Phaser.Scene {
             fill: "yellow"
         });
 
-        this.streak_owned = this.add.text(155,315,"Owned:  "+this.game.registry.get("streak"), {
+        this.streak_owned = this.add.text(155,315,"Owned:  "+this.game.registry.get("multiplier"), {
             font: "18px Arial", 
             fill: "yellow"
         });

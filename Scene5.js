@@ -4,7 +4,7 @@ class Scene5 extends Phaser.Scene {
     }
 
     preload() {
-
+        this.load.image("end_game_btn","assets/images/end_game_btn.png");
     }
 
     create() {
@@ -18,6 +18,15 @@ class Scene5 extends Phaser.Scene {
         this.suspenseMusic = this.sound.add("backgroundMusic").play();
 */
         this.clickSound = this.sound.add("click");
+
+        this.end_game_btn = this.add.image("400", "400", "end_game_btn")
+        .setInteractive()
+        .on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, () => {
+            //this.game.registry.set("score", 30)
+            this.clickSound.play();
+            this.input.on('pointerdown', () => this.scene.start('mainMenu'))
+            this.clickSound.play();
+        })
 
         this.add.text(275,150,"GAME OVER", {
             font: "30px Arial", 
