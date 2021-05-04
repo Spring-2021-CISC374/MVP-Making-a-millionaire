@@ -18,6 +18,8 @@ class Scene2 extends Phaser.Scene {
         this.questionAmountRight = this.questionAmount*(1 + this.game.registry.get("streak") * 0.1)
         this.questionAmountWrong = this.questionAmount
         this.answered = 0;
+        this.powerup_active = false;
+        this.cash_mult = 1;
 
         this.clickSound = this.sound.add("click");
 
@@ -32,12 +34,12 @@ class Scene2 extends Phaser.Scene {
             this.input.on('pointerdown', () => this.scene.start('mainMenu'))
             this.clickSound.play();
         })*/
-        this.mult = this.add.image("45", "60", "streak_img")
+        this.mult = this.add.image("45", "80", "streak_img")
         .setInteractive()
         .on(Phaser.Input.Events.GAMEOBJECT_POINTER_OVER, () => {
 
             if (this.game.registry.get("multiplier") > 0) {
-                this.mult.setScale(0.7);
+                this.mult.setScale(0.75);
                 this.game.canvas.style.cursor = "pointer";
             } else {
                 this.mult.tint = 0xA3A3A3;
@@ -50,7 +52,7 @@ class Scene2 extends Phaser.Scene {
         .on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, () => {
             //this.input.on('pointerdown', () => this.scene.start('mainMenu'))
             //this.streak.setScale(1.15)
-            this.buy("fifty", this.fifty_val, this.fifty_owned);
+            this.usePowerup("multiplier", this.mult);
         })
 
         if (this.game.registry.get("multiplier") == 0) {
@@ -62,12 +64,12 @@ class Scene2 extends Phaser.Scene {
         this.mult.setScale(0.7);
 
 
-        this.fiftylifeline = this.add.image("45", "150", "5050_img")
+        this.fiftylifeline = this.add.image("45", "170", "5050_img")
         .setInteractive()
         .on(Phaser.Input.Events.GAMEOBJECT_POINTER_OVER, () => {
 
             if (this.game.registry.get("fifty") > 0) {
-                this.fiftylifeline.setScale(0.7);
+                this.fiftylifeline.setScale(0.75);
                 this.game.canvas.style.cursor = "pointer";
             } else {
                 this.fiftylifeline.tint = 0xA3A3A3;
@@ -80,7 +82,7 @@ class Scene2 extends Phaser.Scene {
         .on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, () => {
             //this.input.on('pointerdown', () => this.scene.start('mainMenu'))
             //this.streak.setScale(1.15)
-            this.buy("fifty", this.fifty_val, this.fifty_owned);
+            this.usePowerup("fifty", this.fiftylifeline);
         })
 
         if (this.game.registry.get("fifty") == 0) {
@@ -91,34 +93,34 @@ class Scene2 extends Phaser.Scene {
         
         this.fiftylifeline.setScale(0.7);
 
-        this.audience = this.add.image("45", "240", "audience_img")
+        this.audience_lifeline = this.add.image("45", "260", "audience_img")
         .setInteractive()
         .on(Phaser.Input.Events.GAMEOBJECT_POINTER_OVER, () => {
 
             if (this.game.registry.get("audience") > 0) {
-                this.audience.setScale(0.7);
+                this.audience_lifeline.setScale(0.75);
                 this.game.canvas.style.cursor = "pointer";
             } else {
-                this.audience.tint = 0xA3A3A3;
+                this.audience_lifeline.tint = 0xA3A3A3;
             }
         })
         .on(Phaser.Input.Events.GAMEOBJECT_POINTER_OUT, () => {
-            this.audience.setScale(0.7);
+            this.audience_lifeline.setScale(0.7);
             this.game.canvas.style.cursor = "default";
         })
         .on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, () => {
             //this.input.on('pointerdown', () => this.scene.start('mainMenu'))
             //this.streak.setScale(1.15)
-            this.buy("fifty", this.fifty_val, this.fifty_owned);
+            this.usePowerup("audience", this.audience_lifeline);
         })
 
         if (this.game.registry.get("audience") == 0) {
-            this.audience.tint = 0xA3A3A3;
+            this.audience_lifeline.tint = 0xA3A3A3;
         } else {
-            this.audience.clearTint();
+            this.audience_lifeline.clearTint();
         }
         
-        this.audience.setScale(0.7);
+        this.audience_lifeline.setScale(0.7);
 
         this.cashtext = this.add.text(662,13,"Cash:  "+this.game.registry.get("score"), {
             font: "22px Arial", 
@@ -172,6 +174,30 @@ class Scene2 extends Phaser.Scene {
         }
     }
 
+    usePowerup(name, ref_obj) {
+        if (this.game.registry.get(name) > 0 && this.powerup_active == false) {
+            this.game.registry.set(name, this.game.registry.get(name)-1);
+
+            if (this.game.registry.get(name) == 0) {
+                ref_obj.tint = 0xA3A3A3;
+            }
+
+            if (name == "multiplier") {
+                console.log("Multiplier used")
+                this.powerup_active == true;
+                this.cash_mult = 2;
+                this.powerup_active == false;
+            } else if (name == "fifty") {
+                this.powerup_active == true;
+
+            } else if (name == "audience") {
+                this.powerup_active == true;
+
+            }
+        }
+
+    }
+
     loadQuestion(question) {
         //sets answer as "a" "b" "c" or "d"
         var answer = question[1];
@@ -181,8 +207,8 @@ class Scene2 extends Phaser.Scene {
         if (answer == "a") {
             this.question_insideA = this.add.image("85","461","question_inside").setInteractive()
             .on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, () => {
-                this.input.on('pointerdown', () => {if (this.answered <= 1) {this.add.text(5,100,"CORRECT", {
-                    font: "158px Arial", 
+                this.input.on('pointerdown', () => {if (this.answered <= 1) {this.add.text(95,100, "CORRECT", {
+                    font: "130px Arial", 
                     fill: "green",
                     stroke: 'white',
                     strokeThickness: 3
@@ -190,7 +216,7 @@ class Scene2 extends Phaser.Scene {
                     //stuff to happen if right and chosen
                     this.answered++;
                     console.log("Score before: ", this.game.registry.get("score"))
-                    this.game.registry.set("score", this.game.registry.get("score")+this.questionAmountRight)
+                    this.game.registry.set("score", this.game.registry.get("score")+this.questionAmountRight*this.cash_mult)
                     console.log("Score after: ", this.game.registry.get("score"))
                     this.questionAmount = 0;
                     setTimeout(this.titleScreen,3000);
@@ -234,15 +260,15 @@ class Scene2 extends Phaser.Scene {
         if (answer == "b") {
             this.question_insideB = this.add.image("445","461","question_inside").setInteractive()
             .on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, () => {
-                this.input.on('pointerdown', () => {if (this.answered <= 1) {this.add.text(5,100,"CORRECT", {
-                    font: "158px Arial", 
+                this.input.on('pointerdown', () => {if (this.answered <= 1) {this.add.text(95,100,"CORRECT", {
+                    font: "130px Arial", 
                     fill: "green",
                     stroke: 'white',
                     strokeThickness: 3
                 })}})
                     this.answered++;
                     console.log("Score before: ", this.game.registry.get("score"))
-                    this.game.registry.set("score", this.game.registry.get("score")+this.questionAmountRight)
+                    this.game.registry.set("score", this.game.registry.get("score")+this.questionAmountRight*this.cash_mult)
                     console.log("Score after: ", this.game.registry.get("score"))
                     this.questionAmount = 0;
                     setTimeout(this.titleScreen,3000);
@@ -282,15 +308,15 @@ class Scene2 extends Phaser.Scene {
         if (answer == "c") {
             this.question_insideC = this.add.image("85","526","question_inside").setInteractive()
             .on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, () => {
-                this.input.on('pointerdown', () => {if (this.answered <= 1) {this.add.text(5,100,"CORRECT", {
-                    font: "158px Arial", 
+                this.input.on('pointerdown', () => {if (this.answered <= 1) {this.add.text(95,100,"CORRECT", {
+                    font: "130px Arial", 
                     fill: "green",
                     stroke: 'white',
                     strokeThickness: 3
                     })}})
                     this.answered++;
                     console.log("Score before: ", this.game.registry.get("score"))
-                    this.game.registry.set("score", this.game.registry.get("score")+this.questionAmountRight)
+                    this.game.registry.set("score", this.game.registry.get("score")+this.questionAmountRight*this.cash_mult)
                     console.log("Score after: ", this.game.registry.get("score"))
                     this.questionAmount = 0;
                     setTimeout(this.titleScreen,3000);
@@ -329,15 +355,15 @@ class Scene2 extends Phaser.Scene {
         if (answer == "d") {
             this.question_insideD = this.add.image("445","526","question_inside").setInteractive()
             .on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, () => {
-                this.input.on('pointerdown', () => {if (this.answered <= 1) {this.add.text(5,100,"CORRECT", {
-                    font: "158px Arial", 
+                this.input.on('pointerdown', () => {if (this.answered <= 1) {this.add.text(95,100, "CORRECT", {
+                    font: "130px Arial", 
                     fill: "green",
                     stroke: 'white',
                     strokeThickness: 3
                     })}})
                     this.answered++;
                     console.log("Score before: ", this.game.registry.get("score"))
-                    this.game.registry.set("score", this.game.registry.get("score")+this.questionAmountRight)
+                    this.game.registry.set("score", this.game.registry.get("score")+this.questionAmountRight*this.cash_mult)
                     console.log("Score after: ", this.game.registry.get("score"))
                     this.questionAmount = 0;
                     setTimeout(this.titleScreen,3000);
@@ -373,7 +399,11 @@ class Scene2 extends Phaser.Scene {
             this.game.canvas.style.cursor = "default";
         });
 
-        this.cashtext.setText("Cash:  "+this.game.registry.get("score"));
+        if (this.cash_mult > 1) {
+            this.cashtext.setText("Cash X"+this.cash_mult+": "+this.game.registry.get("score"));
+        } else {
+            this.cashtext.setText("Cash:  "+this.game.registry.get("score"));
+        }
 
         this.add.text(117,372,question[0], {
             font: "25px Helvetica", 
