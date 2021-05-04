@@ -6,7 +6,7 @@ Yash - Navigation menu and buttons
 
 Chris - assorted graphics, sfx and music
 
-Jon - switch to menu after answering question
+Jon - switch to menu after answering question, play again functionality
 
 
 
