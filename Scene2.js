@@ -76,6 +76,14 @@ class Scene2 extends Phaser.Scene {
         
     }
 
+    // correct answer is 3 seconds
+    // wrong answer is 5 seconds
+    titleScreen = () => {
+        if (this.scene !== undefined) {
+            this.scene.start('mainMenu');
+        }
+    }
+
     loadQuestion(question) {
         //sets answer as "a" "b" "c" or "d"
         var answer = question[1];
@@ -118,7 +126,7 @@ class Scene2 extends Phaser.Scene {
                     this.game.registry.set("score", this.game.registry.get("score")-this.questionAmount)
                     console.log("Score: ", this.game.registry.get("score"))
                     this.questionAmount = 0;
-                    setTimeout(this.titleScreen,3000);
+                    setTimeout(this.titleScreen,5000);
                     this.game.registry.set("investment", this.game.registry.get("investment")*1.05);
                     this.game.registry.set("streak",0);
 
@@ -159,7 +167,7 @@ class Scene2 extends Phaser.Scene {
                     this.game.registry.set("score", this.game.registry.get("score")-this.questionAmount)
                     console.log("Score: ", this.game.registry.get("score"))
                     this.questionAmount = 0;
-                    setTimeout(this.titleScreen,3000);
+                    setTimeout(this.titleScreen,5000);
                     this.game.registry.set("investment", this.game.registry.get("investment")*1.05);
                     this.game.registry.set("streak",0);
             })
@@ -198,7 +206,7 @@ class Scene2 extends Phaser.Scene {
                     this.game.registry.set("score", this.game.registry.get("score")-this.questionAmount)
                     console.log("Score: ", this.game.registry.get("score"))
                     this.questionAmount = 0;
-                    setTimeout(this.titleScreen,3000);
+                    setTimeout(this.titleScreen,5000);
                     this.game.registry.set("investment", this.game.registry.get("investment")*1.05);
                     this.game.registry.set("streak",0);
             })
@@ -237,7 +245,7 @@ class Scene2 extends Phaser.Scene {
                     this.game.registry.set("score", this.game.registry.get("score")-this.questionAmount)
                     console.log("Score after: ", this.game.registry.get("score"))
                     this.questionAmount = 0;
-                    setTimeout(this.titleScreen,3000);
+                    setTimeout(this.titleScreen,5000);
                     this.game.registry.set("investment", this.game.registry.get("investment")*1.05);
                     this.game.registry.set("streak",0);
             })
@@ -276,11 +284,6 @@ class Scene2 extends Phaser.Scene {
             stroke: 'black',
             strokeThickness: 1
         });
-    }
-
-    titleScreen() {
-        //not sure why this doesn't work
-        this.scene.start('mainMenu')
     }
 
 }
