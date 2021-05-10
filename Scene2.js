@@ -19,7 +19,8 @@ class Scene2 extends Phaser.Scene {
         this.questionAmountWrong = this.questionAmount
         this.answered = 0;
         this.powerup_active = false;
-        this.cash_mult = 1;
+        this.cash_mult = this.game.registry.get("cashmult");
+        this.fifty_used = false;
 
         this.clickSound = this.sound.add("click");
 
@@ -171,6 +172,14 @@ class Scene2 extends Phaser.Scene {
     titleScreen = () => {
         if (this.scene !== undefined) {
             this.scene.start('mainMenu');
+            this.game.registry.set("cashmult", 1);
+        }
+    }
+
+    continueGame = () => {
+        if (this.scene !== undefined) {
+            // this.scene.start('mainMenu');
+            this.scene.restart()
         }
     }
 
@@ -186,6 +195,8 @@ class Scene2 extends Phaser.Scene {
                 console.log("Multiplier used")
                 this.powerup_active == true;
                 this.cash_mult = 2;
+                this.game.registry.set("cashmult", 2);
+
                 this.powerup_active == false;
             } else if (name == "fifty") {
                 this.powerup_active == true;
@@ -219,7 +230,7 @@ class Scene2 extends Phaser.Scene {
                     this.game.registry.set("score", this.game.registry.get("score")+this.questionAmountRight*this.cash_mult)
                     console.log("Score after: ", this.game.registry.get("score"))
                     this.questionAmount = 0;
-                    setTimeout(this.titleScreen,3000);
+                    setTimeout(this.continueGame,3000);
                     this.game.registry.set("investment", this.game.registry.get("investment")*1.05);
                     this.game.registry.set("streak",this.game.registry.get("streak") + 1);
 
@@ -240,7 +251,7 @@ class Scene2 extends Phaser.Scene {
                     this.game.registry.set("score", this.game.registry.get("score")-this.questionAmountWrong)
                     console.log("Score: ", this.game.registry.get("score"))
                     this.questionAmount = 0;
-                    setTimeout(this.titleScreen,5000);
+                    setTimeout(this.continueGame,5000);
                     this.game.registry.set("investment", this.game.registry.get("investment")*1.05);
                     this.game.registry.set("streak",0);
 
@@ -271,7 +282,7 @@ class Scene2 extends Phaser.Scene {
                     this.game.registry.set("score", this.game.registry.get("score")+this.questionAmountRight*this.cash_mult)
                     console.log("Score after: ", this.game.registry.get("score"))
                     this.questionAmount = 0;
-                    setTimeout(this.titleScreen,3000);
+                    setTimeout(this.continueGame,3000);
                     this.game.registry.set("investment", this.game.registry.get("investment")*1.05);
                     this.game.registry.set("streak",this.game.registry.get("streak") + 1);
                     
@@ -319,7 +330,7 @@ class Scene2 extends Phaser.Scene {
                     this.game.registry.set("score", this.game.registry.get("score")+this.questionAmountRight*this.cash_mult)
                     console.log("Score after: ", this.game.registry.get("score"))
                     this.questionAmount = 0;
-                    setTimeout(this.titleScreen,3000);
+                    setTimeout(this.continueGame,3000);
                     this.game.registry.set("investment", this.game.registry.get("investment")*1.05);
                     this.game.registry.set("streak",this.game.registry.get("streak") + 1);
             })
@@ -366,7 +377,7 @@ class Scene2 extends Phaser.Scene {
                     this.game.registry.set("score", this.game.registry.get("score")+this.questionAmountRight*this.cash_mult)
                     console.log("Score after: ", this.game.registry.get("score"))
                     this.questionAmount = 0;
-                    setTimeout(this.titleScreen,3000);
+                    setTimeout(this.continueGame,3000);
                     this.game.registry.set("investment", this.game.registry.get("investment")*1.05);
                     this.game.registry.set("streak",this.game.registry.get("streak") + 1);
             })
@@ -411,30 +422,40 @@ class Scene2 extends Phaser.Scene {
             stroke: 'black',
             strokeThickness: 1
         });
-        this.add.text(85,468,question[2], {
+        this.option1 = this.add.text(85,468,question[2], {
             font: "20px Arial", 
             fill: "yellow",
             stroke: 'black',
             strokeThickness: 1
         });
-        this.add.text(445,468,question[3], {
+        this.option2 = this.add.text(445,468,question[3], {
             font: "20px Arial", 
             fill: "yellow",
             stroke: 'black',
             strokeThickness: 1
         });
-        this.add.text(85,533,question[4], {
+        this.option3 = this.add.text(85,533,question[4], {
             font: "20px Arial", 
             fill: "yellow",
             stroke: 'black',
             strokeThickness: 1
         });
-        this.add.text(445,533,question[5], {
+        this.option4 = this.add.text(445,533,question[5], {
             font: "20px Arial", 
             fill: "yellow",
             stroke: 'black',
             strokeThickness: 1
         });
+
+        if (this.fifty_used) {
+            answer_array = []
+            if (this.question[1] == 'a') {
+                answer_array = [this.option2, this.option3, this.option, this.option4]
+            }
+            answer_array = [this.option1, this.option2, this.question[4], this.option4]
+            first_option = array[Math.floor(Math.random() * array.length)];
+            
+        }
     }
 
 }
