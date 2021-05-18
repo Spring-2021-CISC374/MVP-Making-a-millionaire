@@ -146,44 +146,44 @@ class Scene1 extends Phaser.Scene {
         "Budget",
         "Credit Card",
         "Cash Diary"];
-        /*
-        this.q11 = ["Which is not a reliable way to save for retirement?",
-        "d",
-        "401k",
-        "Traditional IRA",
-        "Roth IRA",
-        "Bitcoin"];
-
-        this.q12 = ["Which is not a reliable way to save for retirement?",
-        "d",
-        "401k",
-        "Traditional IRA",
-        "Roth IRA",
-        "Bitcoin"];
-
-        this.q13 = ["Which is not a reliable way to save for retirement?",
-        "d",
-        "401k",
-        "Traditional IRA",
-        "Roth IRA",
-        "Bitcoin"];
-
-        this.q14 = ["Which is not a reliable way to save for retirement?",
-        "d",
-        "401k",
-        "Traditional IRA",
-        "Roth IRA",
-        "Bitcoin"];
-
-        this.q15 = ["Which is not a reliable way to save for retirement?",
-        "d",
-        "401k",
-        "Traditional IRA",
-        "Roth IRA",
-        "Bitcoin"];
-        */
         
-        let questions = [this.q1,this.q2,this.q3,this.q4,this.q5,this.q6,this.q7,this.q8,this.q9,this.q10]
+        this.q11 = ["Which item usually loses value over time?",
+        "a",
+        "A car",
+        "A house",
+        "Retirement Account",
+        "Gold"];
+        
+        this.q12 = ["This is the main reason for renter's insurance",
+        "d",
+        "In case of fire",
+        "In case of robbery",
+        "In case of a flood",
+        "All three of these"];
+        
+        this.q13 = ["After investing $100 for 5 years at 2% interest",
+        "b",
+        "You will have exactly $102",
+        "You will have more than $102",
+        "You will have less than $102",
+        "There is no way to know"];
+        
+        this.q14 = ["If interest rates rise, usually...",
+        "b",
+        "Bond prices rise",
+        "Bond prices drop",
+        "Bond prices stay the same",
+        "No relationship"];
+        
+        this.q15 = ["If your portfolio goes down 10% then up 10%...",
+        "c",
+        "You made money",
+        "You have the same amount",
+        "You lost money",
+        "We cannot calculate this"];
+        
+        
+        let questions = [this.q1,this.q2,this.q3,this.q4,this.q5,this.q6,this.q7,this.q8,this.q9,this.q10,this.q11,this.q12,this.q13,this.q14,this.q15]
         for (var i = questions.length - 1; i > 0; i--) {
             var j = Math.floor(Math.random() * (i + 1));
             var temp = questions[i];
