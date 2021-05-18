@@ -1,3 +1,5 @@
+//const { NONE } = require("phaser");
+
 class Scene2 extends Phaser.Scene {
     constructor() {
         super("playGame");
@@ -9,6 +11,7 @@ class Scene2 extends Phaser.Scene {
         this.load.image("question_inside","assets/images/question_inside.png");
         this.load.audio("click","sounds/goodclick.mp3");
         this.load.image("background","graphics/background1.png");
+        this.load.image("menu_btn","assets/images/menu_btn.png");
     }
 
     create() {
@@ -21,6 +24,17 @@ class Scene2 extends Phaser.Scene {
         this.powerup_active = false;
         this.cash_mult = this.game.registry.get("cashmult");
         this.fifty_used = false;
+        this.audience_used = false;
+        this.audience_visible = false;
+
+        this.option1 = null
+        this.option2 = null
+        this.option3 = null
+        this.option4 = null
+
+        this.question_dict = {'a': this.option1, 'b': this.option2, 'c': this.option3, 'd': this.option4};
+        this.answer_visiblities = {'a': true, 'b': true, 'c': true, 'd': true};
+        this.answer_percent = {'a': 0, 'b': 0, 'c': 0, 'd': 0};
 
         this.clickSound = this.sound.add("click");
 
@@ -32,9 +46,11 @@ class Scene2 extends Phaser.Scene {
         .on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, () => {
             //this.game.registry.set("score", 30)
             this.clickSound.play();
-            this.input.on('pointerdown', () => this.scene.start('mainMenu'))
+            this.input.on('pointerdown', () => this.titleScreen())
             this.clickSound.play();
         })*/
+
+        
         this.mult = this.add.image("45", "80", "streak_img")
         .setInteractive()
         .on(Phaser.Input.Events.GAMEOBJECT_POINTER_OVER, () => {
@@ -205,9 +221,11 @@ class Scene2 extends Phaser.Scene {
                 this.powerup_active == false;
             } else if (name == "fifty") {
                 this.powerup_active == true;
+                this.fifty_used = true;
 
             } else if (name == "audience") {
                 this.powerup_active == true;
+                this.audience_used = true;
 
             }
         }
@@ -217,7 +235,6 @@ class Scene2 extends Phaser.Scene {
     loadQuestion(question) {
         //sets answer as "a" "b" "c" or "d"
         var answer = question[1];
-        console.log(this.game.registry.get("questionNumber"))
 
         //handles a being correct
         if (answer == "a") {
@@ -263,6 +280,7 @@ class Scene2 extends Phaser.Scene {
             })
         }
 
+        
         this.question_insideA
         .setInteractive()
         .on(Phaser.Input.Events.GAMEOBJECT_POINTER_OVER, () => {
@@ -311,6 +329,7 @@ class Scene2 extends Phaser.Scene {
                     this.game.registry.set("streak",0);
             })
         }
+        
         this.question_insideB
         .setInteractive()
         .on(Phaser.Input.Events.GAMEOBJECT_POINTER_OVER, () => {
@@ -358,6 +377,8 @@ class Scene2 extends Phaser.Scene {
                     this.game.registry.set("streak",0);
             })
         }
+
+        
         this.question_insideC
         .setInteractive()
         .on(Phaser.Input.Events.GAMEOBJECT_POINTER_OVER, () => {
@@ -387,7 +408,7 @@ class Scene2 extends Phaser.Scene {
                     this.game.registry.set("streak",this.game.registry.get("streak") + 1);
             })
         } else {
-                this.question_insideD = this.add.image("445","526","question_inside").setInteractive()
+            this.question_insideD = this.add.image("445","526","question_inside").setInteractive()
             .on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, () => {
                 this.input.on('pointerdown', () => {if (this.answered <= 1) {this.add.text(3,100,"INCORRECT", {
                     font: "130px Arial", 
@@ -405,6 +426,8 @@ class Scene2 extends Phaser.Scene {
                     this.game.registry.set("streak",0);
             })
         }
+
+        
         this.question_insideD.setOrigin(0,0);
         this.question_insideD
         .setInteractive()
@@ -427,6 +450,8 @@ class Scene2 extends Phaser.Scene {
             stroke: 'black',
             strokeThickness: 1
         });
+
+        /*
         this.option1 = this.add.text(85,468,question[2], {
             font: "20px Arial", 
             fill: "yellow",
@@ -451,16 +476,144 @@ class Scene2 extends Phaser.Scene {
             stroke: 'black',
             strokeThickness: 1
         });
+        */
+
+
+        this.question_dict['a']= this.add.text(85,468,question[2], {
+            font: "20px Arial", 
+            fill: "yellow",
+            stroke: 'black',
+            strokeThickness: 1,
+            visible: this.answer_visiblities['a']
+        });
+        this.question_dict['b'] = this.add.text(445,468,question[3], {
+            font: "20px Arial", 
+            fill: "yellow",
+            stroke: 'black',
+            strokeThickness: 1,
+            visible: this.answer_visiblities['b']
+        });
+        this.question_dict['c'] = this.add.text(85,533,question[4], {
+            font: "20px Arial", 
+            fill: "yellow",
+            stroke: 'black',
+            strokeThickness: 1,
+            visible: this.answer_visiblities['c']
+        });
+        this.question_dict['d'] = this.add.text(445,533,question[5], {
+            font: "20px Arial", 
+            fill: "yellow",
+            stroke: 'black',
+            strokeThickness: 1,
+            visible: false
+        });
+
+        if (!this.answer_visiblities['a']) {
+            this.question_insideA.disableInteractive()
+            this.question_dict['a'].visible = this.answer_visiblities['a']
+        }
+
+        if (!this.answer_visiblities['b']) {
+            this.question_insideB.disableInteractive()
+            this.question_dict['b'].visible = this.answer_visiblities['b']
+        }
+
+        if (!this.answer_visiblities['c']) {
+            this.question_insideC.disableInteractive()
+            this.question_dict['c'].visible = this.answer_visiblities['c']
+        }
+
+        if (!this.answer_visiblities['d']) {
+            this.question_insideD.disableInteractive()
+            this.question_dict['d'].visible = this.answer_visiblities['d']
+        } 
+
+        if (this.audience_visible) {
+            this.add.text(320,468, this.answer_percent['a']+"%", {
+                font: "18px Arial", 
+                fill: "#2cfc03",
+                stroke: 'black',
+                strokeThickness: 1,
+            });
+
+            this.add.text(680,468, this.answer_percent['b']+"%", {
+                font: "18px Arial", 
+                fill: "#2cfc03",
+                stroke: 'black',
+                strokeThickness: 1,
+            });
+
+            this.add.text(320,533, this.answer_percent['c']+"%", {
+                font: "18px Arial", 
+                fill: "#2cfc03",
+                stroke: 'black',
+                strokeThickness: 1,
+            });
+
+            this.add.text(680,533, this.answer_percent['d']+"%", {
+                font: "18px Arial", 
+                fill: "#2cfc03",
+                stroke: 'black',
+                strokeThickness: 1,
+            });
+        }
 
         if (this.fifty_used) {
-            answer_array = []
-            if (this.question[1] == 'a') {
-                answer_array = [this.option2, this.option3, this.option, this.option4]
-            }
-            answer_array = [this.option1, this.option2, this.question[4], this.option4]
-            first_option = array[Math.floor(Math.random() * array.length)];
+
+            var answer_keys = Object.keys(this.question_dict)
+            var rand_selection_keys = Object.keys(this.question_dict)
+
+            var answer_index = answer_keys.findIndex(question => question == answer)
+
+            rand_selection_keys.splice(answer_index, 1)
+
+            var first_index = Math.floor(Math.random() * rand_selection_keys.length);
+            var first_non_answer = rand_selection_keys[first_index]
+
+            rand_selection_keys.splice(first_index, 1)
+
+            var second_index = Math.floor(Math.random() * rand_selection_keys.length);
+            var second_non_answer = rand_selection_keys[second_index]
+    
+            this.answer_visiblities[first_non_answer] = false;
+            this.answer_visiblities[second_non_answer] = false;
             
+            this.fifty_used = false;
         }
+
+        if (this.audience_used) {
+            var answer_keys = Object.keys(this.question_dict)
+            var rand_selection_keys = Object.keys(this.question_dict)
+
+            var answer_index = answer_keys.findIndex(question => question == answer)
+            rand_selection_keys.splice(answer_index, 1)
+
+            var correct_answer_percent = Math.round(Math.random() * (80 - 60) + 60)
+
+
+            this.audience_visible = true;
+
+            var max = 100 - correct_answer_percent;
+            var r1 = this.randombetween(1, max-3);
+            var r2 = this.randombetween(1, max-2-r1);
+            var r3 = this.randombetween(1, max-1-r1-r2);
+
+            console.log("Max: ",correct_answer_percent)
+            console.log(r1, r2, r3)
+
+            this.answer_percent[answer] = correct_answer_percent
+
+            this.answer_percent[rand_selection_keys[0]] = r1
+            this.answer_percent[rand_selection_keys[1]] = r2
+            this.answer_percent[rand_selection_keys[2]] = r3
+
+            this.audience_used = false;
+            this.audience_visible = true;
+
+        }
+    }
+    randombetween(min, max) {
+        return Math.floor(Math.random()*(max-min+1)+min);
     }
 
 }
