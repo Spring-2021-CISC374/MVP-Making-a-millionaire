@@ -21,7 +21,7 @@ class Scene3 extends Phaser.Scene {
         .setInteractive()
         .on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, () => {
             this.clickSound.play();
-            this.input.on('pointerdown', () => this.scene.start('mainMenu'))
+            this.input.on('pointerdown', () => this.scene.start('playGame'))
             this.clickSound.play();
         })
 

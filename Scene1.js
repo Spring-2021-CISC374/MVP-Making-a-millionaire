@@ -45,19 +45,19 @@ class Scene1 extends Phaser.Scene {
             this.clickSound.play();
         })
 
-        this.shopBtn = this.add.image("400", "350", "shop_btn")
+        /*this.shopBtn = this.add.image("400", "350", "shop_btn")
         .setInteractive()
         .on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, () => {
             this.input.on('pointerdown', () => this.scene.start('shopScene'))
             this.clickSound.play();
-        })
+        })*/
 
-        this.settingsBtn = this.add.image("400", "425", "settings_btn")
+        /*this.settingsBtn = this.add.image("400", "425", "settings_btn")
         .setInteractive()
         .on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, () => {
             this.input.on('pointerdown', () => this.scene.start('settingScene'))
             this.clickSound.play();
-        })
+        })*/
 
         this.cashtext = this.add.text(662,13,"Cash:  "+this.game.registry.get("score"), {
             font: "22px Arial", 

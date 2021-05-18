@@ -179,7 +179,8 @@ class Scene2 extends Phaser.Scene {
     continueGame = () => {
         if (this.scene !== undefined) {
             // this.scene.start('mainMenu');
-            this.scene.restart()
+            //this.scene.restart()
+            this.scene.start("shopScene");
         }
     }
 
@@ -228,7 +229,6 @@ class Scene2 extends Phaser.Scene {
                     this.answered++;
                     console.log("Score before: ", this.game.registry.get("score"))
                     this.game.registry.set("score", this.game.registry.get("score")+this.questionAmountRight*this.cash_mult)
-                    console.log("test", this.cash_mult)
                     console.log("Score after: ", this.game.registry.get("score"))
                     this.questionAmount = 0;
                     setTimeout(this.continueGame,3000);
@@ -302,7 +302,7 @@ class Scene2 extends Phaser.Scene {
                     this.game.registry.set("score", this.game.registry.get("score")-this.questionAmountWrong)
                     console.log("Score: ", this.game.registry.get("score"))
                     this.questionAmount = 0;
-                    setTimeout(this.titleScreen,5000);
+                    setTimeout(this.continueGame,5000);
                     this.game.registry.set("investment", this.game.registry.get("investment")*1.05);
                     this.game.registry.set("streak",0);
             })
@@ -349,7 +349,7 @@ class Scene2 extends Phaser.Scene {
                     this.game.registry.set("score", this.game.registry.get("score")-this.questionAmountWrong)
                     console.log("Score: ", this.game.registry.get("score"))
                     this.questionAmount = 0;
-                    setTimeout(this.titleScreen,5000);
+                    setTimeout(this.continueGame,5000);
                     this.game.registry.set("investment", this.game.registry.get("investment")*1.05);
                     this.game.registry.set("streak",0);
             })
@@ -396,7 +396,7 @@ class Scene2 extends Phaser.Scene {
                     this.game.registry.set("score", this.game.registry.get("score")-this.questionAmountWrong)
                     console.log("Score after: ", this.game.registry.get("score"))
                     this.questionAmount = 0;
-                    setTimeout(this.titleScreen,5000);
+                    setTimeout(this.ContinueGame,5000);
                     this.game.registry.set("investment", this.game.registry.get("investment")*1.05);
                     this.game.registry.set("streak",0);
             })
