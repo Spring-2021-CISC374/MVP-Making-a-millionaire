@@ -16,7 +16,7 @@ window.onload =  function() {
 
     game.registry.set("score", 750)
     game.registry.set("multiplier", 0)
-    game.registry.set("cashmult", 0)
+    game.registry.set("cashmult", 1)
     game.registry.set("fifty", 0)
     game.registry.set("audience", 0)
     game.registry.set("questionNumber",0)

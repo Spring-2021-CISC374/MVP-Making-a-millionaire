@@ -149,8 +149,8 @@ class Scene1 extends Phaser.Scene {
         
         this.q11 = ["Which item usually loses value over time?",
         "a",
-        "A car",
-        "A house",
+        "A Car",
+        "A House",
         "Retirement Account",
         "Gold"];
         
