@@ -155,10 +155,7 @@ class Scene2 extends Phaser.Scene {
         var questionNumber = this.game.registry.get("questionNumber");
         var question = this.game.registry.get("questionBank")[questionNumber -1];
 
-        if (questionNumber > 14) {
-            //currently does not fully work
-            this.scene.start('endScene')
-        }
+        
 
         this.add.text(330,10,"Question #" + questionNumber, {
             font: "28px Arial", 
@@ -169,18 +166,25 @@ class Scene2 extends Phaser.Scene {
         
     }
 
+    /*
     titleScreen = () => {
         if (this.scene !== undefined) {
             this.scene.start('mainMenu');
             this.game.registry.set("cashmult", 1);
         }
     }
+    */
 
     continueGame = () => {
         if (this.scene !== undefined) {
             // this.scene.start('mainMenu');
             //this.scene.restart()
-            this.scene.start("shopScene");
+            this.game.registry.set("cashmult", 1);
+            var questionNumber = this.game.registry.get("questionNumber");
+            if (questionNumber > 14) {
+                this.scene.start('endScene')
+            }
+            else this.scene.start("shopScene");
         }
     }
 
@@ -228,7 +232,7 @@ class Scene2 extends Phaser.Scene {
                     //stuff to happen if right and chosen
                     this.answered++;
                     console.log("Score before: ", this.game.registry.get("score"))
-                    this.game.registry.set("score", this.game.registry.get("score")+this.questionAmountRight*this.cash_mult)
+                    this.game.registry.set("score", Math.round(this.game.registry.get("score")+this.questionAmountRight*this.cash_mult))
                     console.log("Score after: ", this.game.registry.get("score"))
                     this.questionAmount = 0;
                     setTimeout(this.continueGame,3000);
@@ -280,7 +284,7 @@ class Scene2 extends Phaser.Scene {
                 })}})
                     this.answered++;
                     console.log("Score before: ", this.game.registry.get("score"))
-                    this.game.registry.set("score", this.game.registry.get("score")+this.questionAmountRight*this.cash_mult)
+                    this.game.registry.set("score", Math.round(this.game.registry.get("score")+this.questionAmountRight*this.cash_mult))
                     console.log("Score after: ", this.game.registry.get("score"))
                     this.questionAmount = 0;
                     setTimeout(this.continueGame,3000);
@@ -328,7 +332,7 @@ class Scene2 extends Phaser.Scene {
                     })}})
                     this.answered++;
                     console.log("Score before: ", this.game.registry.get("score"))
-                    this.game.registry.set("score", this.game.registry.get("score")+this.questionAmountRight*this.cash_mult)
+                    this.game.registry.set("score", Math.round(this.game.registry.get("score")+this.questionAmountRight*this.cash_mult))
                     console.log("Score after: ", this.game.registry.get("score"))
                     this.questionAmount = 0;
                     setTimeout(this.continueGame,3000);
@@ -375,7 +379,7 @@ class Scene2 extends Phaser.Scene {
                     })}})
                     this.answered++;
                     console.log("Score before: ", this.game.registry.get("score"))
-                    this.game.registry.set("score", this.game.registry.get("score")+this.questionAmountRight*this.cash_mult)
+                    this.game.registry.set("score", Math.round(this.game.registry.get("score")+this.questionAmountRight*this.cash_mult))
                     console.log("Score after: ", this.game.registry.get("score"))
                     this.questionAmount = 0;
                     setTimeout(this.continueGame,3000);

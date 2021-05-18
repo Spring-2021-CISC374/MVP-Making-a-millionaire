@@ -12,9 +12,9 @@ class Scene3 extends Phaser.Scene {
         this.clickSound = this.sound.add("click");
         this.clickSound = this.sound.add("click");
 
-        this.streak_val = 200;
-        this.fifty_val = 150;
-        this.audience_val = 120;
+        this.streak_val = 100;
+        this.fifty_val = 50;
+        this.audience_val = 75;
         this.min_invest = 200;
 
         this.backBtn = this.add.image("60", "25", "back_btn")
@@ -67,7 +67,7 @@ class Scene3 extends Phaser.Scene {
             //this.input.on('pointerdown', () => this.scene.start('mainMenu'))
             //this.streak.setScale(1.15)
             if (this.game.registry.get("score") >= this.streak_val && this.game.registry.get("multiplier") == 0) {
-                this.buy("multiplier", 200, this.streak_owned);
+                this.buy("multiplier", 100, this.streak_owned);
             } else {
                 this.multiplier_text = this.add.text(250,400,"Can only purchase single multiplier at a time", {
                     font: "16px Arial", 
@@ -135,17 +135,17 @@ class Scene3 extends Phaser.Scene {
             fill: "yellow"
         });
 
-        this.streak_price = this.add.text(160,290,"Price: 200", {
+        this.streak_price = this.add.text(160,290,"Price: 100", {
             font: "18px Arial", 
             fill: "yellow"
         });
 
-        this.fifty_price = this.add.text(360,290,"Price: 150", {
+        this.fifty_price = this.add.text(360,290,"Price: 50", {
             font: "18px Arial", 
             fill: "yellow"
         });
 
-        this.audience_price = this.add.text(560,290,"Price: 120", {
+        this.audience_price = this.add.text(560,290,"Price: 75", {
             font: "18px Arial", 
             fill: "yellow"
         });
